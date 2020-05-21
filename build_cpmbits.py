@@ -21,10 +21,10 @@ class MenuItem:
 
 
 @dataclass
-class DocumentPage:
-    title: str
-    href: str
-    page_contents: str
+class DocumentationPage:
+    title: str = 'Untitled'
+    href: str = ''
+    contents: str = ''
 
 
 def main():
@@ -34,8 +34,7 @@ def main():
     with open(f'{OUTPUT_DIRECTORY}/index.html', 'w+') as stream:
         stream.write(render_index_page())
 
-    with open(f'{OUTPUT_DIRECTORY}/documentation.html', 'w+') as stream:
-        stream.write(render_documentation_index_page())
+    render_documentation()
 
     shutil.copytree('resources/css', f'{OUTPUT_DIRECTORY}/css')
     shutil.copytree('resources/js', f'{OUTPUT_DIRECTORY}/js')
@@ -65,15 +64,37 @@ def render_index_page():
     return Template(contents).render(head=head, navbar=navbar, footer=footer)
 
 
-def render_documentation_index_page():
+def render_documentation():
+    convert_docs()
+    converted_docs = glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html')
+    documentation_pages = [as_documentation_page(converted_doc) for converted_doc in converted_docs]
+    aside_menu = render_documentation_aside_menu(documentation_pages)
+
+    with open(f'{OUTPUT_DIRECTORY}/documentation.html', 'w+') as stream:
+        stream.write(render_documentation_index_page(aside_menu))
+
+    for documentation_page in documentation_pages:
+        with open(f'{OUTPUT_DIRECTORY}/{documentation_page.href}', 'w+') as stream:
+            stream.write(render_documentation_page(documentation_page, aside_menu))
+
+
+def as_documentation_page(converted_doc):
+    documentation_page = DocumentationPage()
+    documentation_page.title = document_page_title(converted_doc)
+    documentation_page.href = f'{os.path.basename(converted_doc)}'
+    with open(converted_doc, 'r') as stream:
+        documentation_page.contents = stream.read()
+    return documentation_page
+
+
+def render_documentation_index_page(aside_menu):
     menu_items = [
-        MenuItem('Documentation', True, "documentation.html"),
+        MenuItem('Documentation', False, "documentation.html"),
         MenuItem('Browse', False, "browse.html"),
         MenuItem('Blog', False, "blog.html"),
     ]
     head = render_head()
     navbar = render_navbar(menu_items)
-    aside_menu = render_documentation_aside_menu()
     footer = render_footer()
 
     with open('templates/views/documentation.html') as stream:
@@ -81,21 +102,35 @@ def render_documentation_index_page():
     return Template(contents).render(head=head, navbar=navbar, aside_menu=aside_menu, footer=footer)
 
 
-def render_documentation_pages():
-    converted_docs = glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html')
+def render_documentation_page(documentation_page, aside_menu):
+    menu_items = [
+        MenuItem('Documentation', False, "documentation.html"),
+        MenuItem('Browse', False, "browse.html"),
+        MenuItem('Blog', False, "blog.html"),
+    ]
+    head = render_head()
+    navbar = render_navbar(menu_items)
+    footer = render_footer()
+
+    with open('templates/views/documentation_page.html') as stream:
+        contents = stream.read()
+    return Template(contents).render(head=head, navbar=navbar, aside_menu=aside_menu, doc=documentation_page, footer=footer)
 
 
-def all_documentation_pages():
-    converted_docs = glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html')
-
+def document_page_title(docfile):
+    return file_basename(docfile).replace('_', ' ').title()
 
 
 def convert_docs():
     docs = glob.glob(f'{DOCS_DIRECTORY}/*.md')
     for doc in docs:
         subprocess.run(
-            ['pandoc', '-f', 'markdown', '-t', 'html5', doc, '-o', f'{DOCS_OUTPUT_DIRECTORY}/{os.path.basename(doc)}.html']
+            ['pandoc', '-f', 'markdown', '-t', 'html5', doc, '-o', f'{DOCS_OUTPUT_DIRECTORY}/{file_basename(doc)}.html']
         )
+
+
+def file_basename(path):
+    return os.path.splitext(os.path.basename(path))[0]
 
 
 def render_head():
@@ -119,10 +154,10 @@ def render_footer():
     return footer
 
 
-def render_documentation_aside_menu():
+def render_documentation_aside_menu(documentation_pages):
     with open('templates/components/documentation_aside_menu.html') as stream:
         documentation_aside_menu_payload = stream.read()
-        documentation_aside_menu = Template(documentation_aside_menu_payload).render()
+        documentation_aside_menu = Template(documentation_aside_menu_payload).render(documents=documentation_pages)
     return documentation_aside_menu
 
 
