@@ -39,6 +39,7 @@ def main():
     shutil.copytree('resources/css', f'{OUTPUT_DIRECTORY}/css')
     shutil.copytree('resources/js', f'{OUTPUT_DIRECTORY}/js')
     shutil.copytree('resources/img', f'{OUTPUT_DIRECTORY}/img')
+    shutil.copy('resources/img/favicon.ico', f'{OUTPUT_DIRECTORY}')
 
 
 def empty_directory(directory):
@@ -52,8 +53,8 @@ def empty_directory(directory):
 def render_index_page():
     menu_items = [
         MenuItem('Documentation', False, "documentation.html"),
-        MenuItem('Browse', False, "browse.html"),
-        MenuItem('Blog', False, "blog.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
     ]
     head = render_head()
     navbar = render_navbar(menu_items)
@@ -90,8 +91,8 @@ def as_documentation_page(converted_doc):
 def render_documentation_index_page(aside_menu):
     menu_items = [
         MenuItem('Documentation', False, "documentation.html"),
-        MenuItem('Browse', False, "browse.html"),
-        MenuItem('Blog', False, "blog.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
     ]
     head = render_head()
     navbar = render_navbar(menu_items)
@@ -105,8 +106,8 @@ def render_documentation_index_page(aside_menu):
 def render_documentation_page(documentation_page, aside_menu):
     menu_items = [
         MenuItem('Documentation', False, "documentation.html"),
-        MenuItem('Browse', False, "browse.html"),
-        MenuItem('Blog', False, "blog.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
     ]
     head = render_head()
     navbar = render_navbar(menu_items)
