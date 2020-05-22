@@ -1,6 +1,6 @@
 # What is CPM
 
-CPM is born as a tool for the modernization of C and C++ based projects. Modern languages have strong development frameworks and really amazing project management tools. Combined with CPM Hub, CPM will provide an ecosystem for creating projects in a much easier way, reducing the high entrance fee required for developing in multi-target environments. It will provide the means for sharing plugins (note that we're not using the term libraries) via source code.
+CPM is born as a tool for the modernization of C and C++ based projects. Modern languages have strong development frameworks and really amazing project management tools. Combined with CPM Hub, CPM will enable an ecosystem for creating projects in a much easier way, reducing the high entrance fee required for developing in multi-target environments. It will provide the means for sharing *bits* via source code.
 
 ### Ease of Use
 
@@ -16,7 +16,7 @@ Being compiled languages, C and C++ can provide the best possible performance fo
 
 ### Multiple Targets
 
-One of the main design goals of CPM is to have a tool that will allow compiling for any platform. The plugin ecosystem will provide the means to develop software for many combinations of Operating System / Architecture. Custom actions will allow users to share target-specific build scripts that could be used to develop software for many platforms (e.g. Arduino).
+One of the main design goals of CPM is to have a tool that will allow compiling for any platform. The bit ecosystem will provide the means to develop software for many combinations of Operating System / Architecture. Custom actions will allow users to share target-specific build scripts that could be used to develop software for many platforms (e.g. Arduino).
 
 ### Seamless Development
 

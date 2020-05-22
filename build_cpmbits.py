@@ -70,7 +70,7 @@ def render_index_page():
 
 def render_documentation():
     convert_docs()
-    converted_docs = glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html')
+    converted_docs = sorted(glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html'))
     documentation_pages = [as_documentation_page(converted_doc) for converted_doc in converted_docs]
     aside_menu = render_documentation_aside_menu(documentation_pages)
 
@@ -127,7 +127,6 @@ def customize_documentation_page_html(contents):
         'h1': 'title is-2',
         'h2': 'subtitle is-3',
         'h3': 'subtitle is-4',
-        'p': 'is-spaced'
     }
 
     soup = BeautifulSoup(contents, 'html.parser')
