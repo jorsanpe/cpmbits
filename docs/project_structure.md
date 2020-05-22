@@ -1,4 +1,4 @@
-# Project Structure {.title .is-2}
+# Project Structure
 
 This section describes how CPM projects are managed. When in doubt, please refer to [CPM Hub](https://github.com/jorsanpe/cpm-hub) for reference, as CPM Hub is based on CPM.
 
@@ -22,19 +22,19 @@ Project/
 
 <br/>
 
-## `project.yaml` {.subtitle .is-4}
+## `project.yaml`
 
 The project description is stored in this file following the [CPM project schema](cpm-project-schema). This file contains the description of the project, the packages that compose the source code, the `bits` it depends on and the rules for specific targets.
 
 <br/>
 
-## `main.cpp` {.subtitle .is-4}
+## `main.cpp`
 
 The `main.cpp` file contains the `main` function of the application. This file is required to exist in the project root directory and contain the implementation of the `main` function.
 
 <br/>
 
-## Packages {.subtitle .is-3}
+## Packages
 
 Packages allow the user to structure the code however needed. By design, we're removing the `src <-> include` separation. Instead, source code and header files are stored next to each other, creating a proper structure for packages. A _package_ in CPM is the root of a set of source files with no particular structure. The package sources are found recursively from the package root.
 
@@ -67,13 +67,13 @@ Once the package has been created, the parent path of the package will be includ
 
 <br/>
 
-## Bits {.subtitle .is-3}
+## Bits
 
 CPM `bits` are the main way of sharing code between CPM projects. 
 
 <br/>
 
-## Tests {.subtitle .is-3}
+## Tests
 
 When testing, CPM will find for files matching the `test_*.cpp` pattern and will consider them as test suites. Each test suite will be compiled separately as a binary application and run. CPM leaves the choice of the testing framework to the developer.
 
@@ -81,6 +81,6 @@ CPM is developed jointly with CPM Hub, which is both the bits repository and the
 
 <br/>
 
-## Bits {.subtitle .is-3}
+## Bits
 
 Bits are a major feature of CPM. They allow sharing code similar to what other modern tools are doing like `pip` or `npm`. This feature is currently under development and will be served by CPM Hub instances.

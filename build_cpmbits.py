@@ -41,6 +41,8 @@ def main():
     shutil.copytree('resources/img', f'{OUTPUT_DIRECTORY}/img')
     shutil.copy('resources/img/favicon.ico', f'{OUTPUT_DIRECTORY}')
 
+    generate_css()
+
 
 def empty_directory(directory):
     try:
@@ -120,6 +122,10 @@ def render_documentation_page(documentation_page, aside_menu):
 
 def document_page_title(docfile):
     return file_basename(docfile).replace('_', ' ').title()
+
+
+def generate_css():
+    subprocess.run(['sass', f'bulma-customization/cpmbits.scss:{OUTPUT_DIRECTORY}/css/cpmbits.css'])
 
 
 def convert_docs():
