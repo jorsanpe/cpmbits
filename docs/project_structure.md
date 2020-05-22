@@ -20,19 +20,13 @@ Project/
                 cest.h
 ```
 
-<br/>
-
 ## `project.yaml`
 
 The project description is stored in this file following the [CPM project schema](cpm-project-schema). This file contains the description of the project, the packages that compose the source code, the `bits` it depends on and the rules for specific targets.
 
-<br/>
-
 ## `main.cpp`
 
 The `main.cpp` file contains the `main` function of the application. This file is required to exist in the project root directory and contain the implementation of the `main` function.
-
-<br/>
 
 ## Packages
 
@@ -65,21 +59,15 @@ Once the package has been created, the parent path of the package will be includ
 #include <api/api.h>
 ```
 
-<br/>
-
 ## Bits
 
 CPM `bits` are the main way of sharing code between CPM projects. 
-
-<br/>
 
 ## Tests
 
 When testing, CPM will find for files matching the `test_*.cpp` pattern and will consider them as test suites. Each test suite will be compiled separately as a binary application and run. CPM leaves the choice of the testing framework to the developer.
 
 CPM is developed jointly with CPM Hub, which is both the bits repository and the first CPM project. In turn, CPM Hub is using [Cest](https://github.com/cegonse/cest), so there's good synergy between them. 
-
-<br/>
 
 ## Bits
 

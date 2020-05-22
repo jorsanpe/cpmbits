@@ -4,6 +4,7 @@ import glob
 import subprocess
 from dataclasses import dataclass
 import shutil
+from bs4 import BeautifulSoup
 
 from jinja2 import Template
 
@@ -86,7 +87,8 @@ def as_documentation_page(converted_doc):
     documentation_page.title = document_page_title(converted_doc)
     documentation_page.href = f'{os.path.basename(converted_doc)}'
     with open(converted_doc, 'r') as stream:
-        documentation_page.contents = stream.read()
+        raw_contents = stream.read()
+    documentation_page.contents = customize_documentation_page_html(raw_contents)
     return documentation_page
 
 
@@ -115,17 +117,28 @@ def render_documentation_page(documentation_page, aside_menu):
     navbar = render_navbar(menu_items)
     footer = render_footer()
 
-    with open('templates/views/documentation_page.html') as stream:
+    with open('templates/views/documentation_page.html', 'r') as stream:
         contents = stream.read()
     return Template(contents).render(head=head, navbar=navbar, aside_menu=aside_menu, doc=documentation_page, footer=footer)
 
 
+def customize_documentation_page_html(contents):
+    class_customization = {
+        'h1': 'title is-2',
+        'h2': 'subtitle is-3',
+        'h3': 'subtitle is-4',
+        'p': 'is-spaced'
+    }
+
+    soup = BeautifulSoup(contents, 'html.parser')
+    for c in class_customization:
+        for tag in soup.find_all(c):
+            tag['class'] = class_customization[c]
+    return soup.encode("utf-8").decode()
+
+
 def document_page_title(docfile):
     return file_basename(docfile).replace('_', ' ').title()
-
-
-def generate_css():
-    subprocess.run(['sass', f'bulma-customization/cpmbits.scss:{OUTPUT_DIRECTORY}/css/cpmbits.css'])
 
 
 def convert_docs():
@@ -134,6 +147,10 @@ def convert_docs():
         subprocess.run(
             ['pandoc', '-f', 'markdown', '-t', 'html5', doc, '-o', f'{DOCS_OUTPUT_DIRECTORY}/{file_basename(doc)}.html']
         )
+
+
+def generate_css():
+    subprocess.run(['sass', f'bulma-customization/cpmbits.scss:{OUTPUT_DIRECTORY}/css/cpmbits.css'])
 
 
 def file_basename(path):
