@@ -55,7 +55,7 @@ def empty_directory(directory):
 
 def render_index_page():
     menu_items = [
-        MenuItem('Documentation', False, "documentation.html"),
+        MenuItem('Documentation', False, "1_getting_started.html"),
         MenuItem('Browse', False, "#"),
         MenuItem('Blog', False, "#"),
     ]
@@ -94,7 +94,7 @@ def as_documentation_page(converted_doc):
 
 def render_documentation_index_page(aside_menu):
     menu_items = [
-        MenuItem('Documentation', False, "documentation.html"),
+        MenuItem('Documentation', False, "1_getting_started.html"),
         MenuItem('Browse', False, "#"),
         MenuItem('Blog', False, "#"),
     ]
@@ -109,7 +109,7 @@ def render_documentation_index_page(aside_menu):
 
 def render_documentation_page(documentation_page, aside_menu):
     menu_items = [
-        MenuItem('Documentation', False, "documentation.html"),
+        MenuItem('Documentation', False, "1_getting_started.html"),
         MenuItem('Browse', False, "#"),
         MenuItem('Blog', False, "#"),
     ]
