@@ -28,6 +28,13 @@ class DocumentationPage:
     contents: str = ''
 
 
+@dataclass
+class BlogPost:
+    title: str = 'Untitled'
+    href: str = ''
+    contents: str = ''
+
+
 def main():
     empty_directory(OUTPUT_DIRECTORY)
     empty_directory(DOCS_OUTPUT_DIRECTORY)

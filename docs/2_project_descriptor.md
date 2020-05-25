@@ -24,10 +24,9 @@ This section contains the list of packages of the project. A `package` in CPM is
 
 Each package has to be declared in the `packages` section with the same name as its root folder. For example, for declaring the `api/json` directory as a package, the project descriptor should be:
 
-```
-packages:
+<pre><code class="language-yaml">packages:
     api/json:
-```
+</code></pre>
 
 ### `packages.{name}.cflags: [string]`
 
@@ -57,15 +56,13 @@ The user can define project specific actions in this section.
 
 Each key in the actions section is the action alias. The value is a string with the command to be executed for that action:
 
-```
-actions:
+<pre><code class="language-yaml">actions:
     deploy: "echo Deploy!"
-```
+</code></pre>
 
 ## Sample file
 
-```yaml
-project_name: 'PortalGunFirmware'
+<pre><code class="language-yaml">project_name: 'PortalGunFirmware'
 description: 'Project description'
 packages:
     - api:
@@ -82,5 +79,4 @@ link_options:
     libraries: ['pthread']
 actions:
     deploy: 'echo Deploy!'
-```
-
+</code></pre>
