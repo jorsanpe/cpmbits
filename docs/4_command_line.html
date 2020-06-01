@@ -100,50 +100,56 @@
         <div class="column content">
           <h1 class="title is-2" id="cpm-command-line">cpm Command Line</h1>
 <p>The command line is structured around commands, similar to what you can find in other tools (e.g. Git):</p>
-<pre><code class="language-bash">  cpm <action> [options]
-</action></code></pre>
+<pre><code class="language-bash">cpm &lt;action&gt; [options]
+</code></pre>
 <h2 class="subtitle is-3" id="built-in-actions">Built-in Actions</h2>
 <h3 class="subtitle is-4" id="create"><code>create</code></h3>
 <p>Create a new CPM project. This command is intended for creating new CPM projects from scratch.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm create &lt;project_name&gt;
+<pre><code class="language-bash">cpm create &lt;project_name&gt;
 </code></pre>
 <h3 class="subtitle is-4" id="init"><code>init</code></h3>
 <p>Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm init &lt;project_name&gt;
+<pre><code class="language-bash">cpm init &lt;project_name&gt;
 </code></pre>
 <h3 class="subtitle is-4" id="build"><code>build</code></h3>
 <p>Build CPM project. The build command creates a CMake recipe in the project root directory. It then calls <code>cmake</code> and <code>ninja</code> to build the project using the <code>build</code> directory for the output files. The output binary will have the same name as the <code>project_name</code> field in the project descriptor and it will be placed in the project root directory.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm build
+<pre><code class="language-bash">cpm build [&lt;target&gt;]
+</code></pre>
+<p><strong>OPTIONS</strong></p>
+<p><code>&amp;lt;target&amp;gt;</code> The target option allows you to compile the application for a specific target. When this option is not specified, <code>cpm</code> will use the installed compiler. If this option is specified, then <code>cpm</code> will download the corresponding image from the <a href="https://hub.docker.com/orgs/cpmbits/repositories">cpmbits docker repositories</a> as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names.</p>
+<p><strong>EXAMPLE</strong></p>
+<pre><code class="language-bash">cpm build ubuntu:20.04
+cpm build raspberrypi4:64
 </code></pre>
 <h3 class="subtitle is-4" id="test"><code>test</code></h3>
 <p>Compile and run project tests. Tests are found recursively starting from the <code>tests</code> directory, located in the project root. The tests compilation recipe are placed in the directory <code>recipes/tests</code> which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm test [&lt;pattern&gt;...]
+<pre><code class="language-bash">cpm test [&lt;pattern&gt;...]
 </code></pre>
 <p><strong>OPTIONS</strong></p>
 <p><code>&amp;lt;pattern&amp;gt;...</code> The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.</p>
 <h3 class="subtitle is-4" id="clean"><code>clean</code></h3>
 <p>Clean CPM project. The clean command basically removes the <code>recipes</code> directory, effectively removing any CMake recipes built and all compilation caches.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm clean
+<pre><code class="language-bash">cpm clean
 </code></pre>
 <h3 class="subtitle is-4" id="publish"><code>publish</code></h3>
 <p>Publish a CPM project as a plugin in CPM Hub. The publish command packs the project descriptor and its packages into a <code>zip</code> file and then uploads it to the CPM Hub plugin repository. The project descriptor file name is changed in the process from <code>project.yaml</code> to <code>plugin.yaml</code>.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm publish
+<pre><code class="language-bash">cpm publish
 </code></pre>
 <h3 class="subtitle is-4" id="install"><code>install</code></h3>
 <p>Install the latest version of the plugin with the given name. The install command downloads the plugin from CPM Hub and unpacks it into the <code>plugins</code> directory. It then modifies the <code>project.yaml</code> file to include the plugin and the downloaded version.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm install <plugin_name>
+<pre><code class="language-bash">cpm install <plugin_name>
 </plugin_name></code></pre>
 <h3 class="subtitle is-4" id="update"><code>update</code></h3>
 <p>This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">  cpm update
+<pre><code class="language-bash">cpm update
 </code></pre>
 <h1 class="title is-2" id="project-actions">Project Actions</h1>
 <p>The user can define project specific actions in the project descriptor. This is done through the <code>actions</code> section described in the <a href="https://github.com/jorsanpe/cpm/wiki/Project-Descriptor">project descriptor</a>. Actions defined there will appear in the command line.</p>
