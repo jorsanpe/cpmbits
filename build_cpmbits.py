@@ -9,9 +9,9 @@ from bs4 import BeautifulSoup
 from jinja2 import Template
 
 
-DOCS_DIRECTORY = 'docs'
-OUTPUT_DIRECTORY = 'output'
+OUTPUT_DIRECTORY = 'docs'
 DOCS_OUTPUT_DIRECTORY = 'docs_output'
+DOCS_DIRECTORY = 'documentation'
 
 
 @dataclass

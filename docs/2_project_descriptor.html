@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPM Bits</title>
+  <link rel="stylesheet" href="css/cpmbits.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="css/prism.css" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="js/prism.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar has-shadow is-light" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://cpmbits.com">
+                <img src="img/cpmbits-logo.png" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbar-links" class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a class="navbar-item " href="1_getting_started.html">
+                    Documentation
+                </a>
+                
+                <a class="navbar-item " href="#">
+                    Browse
+                </a>
+                
+                <a class="navbar-item " href="#">
+                    Blog
+                </a>
+                
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="https://github.com/jorsanpe/cpm" target="_blank">
+                            <img src="img/GitHub-Mark-32px.png" height="28">
+                        </a>
+                        <a class="button is-primary" title="User registration only with inviation" disabled>
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth has-background-white-bis">
+          <aside class="menu">
+    <p class="menu-label">
+        Documentation
+    </p>
+    <ul class="menu-list">
+        
+        <li><a href="1_getting_started.html">
+            1 Getting Started
+        </a></li>
+        
+        <li><a href="2_project_descriptor.html">
+            2 Project Descriptor
+        </a></li>
+        
+        <li><a href="3_project_structure.html">
+            3 Project Structure
+        </a></li>
+        
+        <li><a href="4_command_line.html">
+            4 Command Line
+        </a></li>
+        
+        <li><a href="5_why_cpm.html">
+            5 Why Cpm
+        </a></li>
+        
+    </ul>
+</aside>
+        </div>
+        <div class="column content">
+          <h1 class="title is-2" id="project-descriptor">Project Descriptor</h1>
+<p>The project descriptor is a YAML file with the name <code>project.yaml</code> that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a CPM project.</p>
+<h2 class="subtitle is-3" id="elements-of-the-project-descriptor">Elements of the project descriptor</h2>
+<h3 class="subtitle is-4" id="name-string"><code>name: string</code></h3>
+<p>The project name field is a string identifying the project. The application will be compiled into a binary file with this name. The <code>name</code> should not contain any spaces.</p>
+<h3 class="subtitle is-4" id="description-string"><code>description: string</code></h3>
+<p>This field has currently no practical purpose other than allowing the user to include a larger description of the project.</p>
+<h3 class="subtitle is-4" id="version-string"><code>version: string</code></h3>
+<p>This field is required when the current project is intended to be published in CPM Hub. The version will be used to publish the plugin accordingly. When not present, the <code>version</code> field defaults to <code>"0.1"</code>.</p>
+<h3 class="subtitle is-4" id="packages-object"><code>packages: object</code></h3>
+<p>This section contains the list of packages of the project. A <code>package</code> in CPM is the root directory of a set of source files. For example, when declaring an <code>api</code> package, CPM will recursively search <code>*.c</code> and <code>*.cpp</code> source files in the directory with that name.</p>
+<h3 class="subtitle is-4" id="packages.name-object"><code>packages.{name}: object</code></h3>
+<p>Each package has to be declared in the <code>packages</code> section with the same name as its root folder. For example, for declaring the <code>api/json</code> directory as a package, the project descriptor should be:</p>
+<pre><code class="language-yaml">packages:
+    api/json:
+</code></pre>
+<h3 class="subtitle is-4" id="packages.name.cflags-string"><code>packages.{name}.cflags: [string]</code></h3>
+<p>Packages can be assigned specific compilation flags with the <code>cflags</code> property. This allows, among other things, mixing C99 and C++11 code in the same executable.</p>
+<h3 class="subtitle is-4" id="bits-object"><code>bits: object</code></h3>
+<p>This section is used to declare which <code>bits</code> the project depends on. The entries in the <code>bits</code> section will be used to access CPM Hub and download the declared version of each bit when updating the project.</p>
+<h3 class="subtitle is-4" id="compile_flags-string"><code>compile_flags: [string]</code></h3>
+<p>This property allows the user to configure the global compilation options. This flags will only apply to the project sources.</p>
+<h3 class="subtitle is-4" id="link_options-object"><code>link_options: object</code></h3>
+<p>This property allows the user to define the link options of the binary.</p>
+<h3 class="subtitle is-4" id="link_options.libraries-string"><code>link_options.libraries: [string]</code></h3>
+<p>The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake <code>target_link_libraries</code> option with the list expanded.</p>
+<h3 class="subtitle is-4" id="actions-object"><code>actions: object</code></h3>
+<p>The user can define project specific actions in this section.</p>
+<h3 class="subtitle is-4" id="actions.name-string"><code>actions.{name}: string</code></h3>
+<p>Each key in the actions section is the action alias. The value is a string with the command to be executed for that action:</p>
+<pre><code class="language-yaml">actions:
+    deploy: "echo Deploy!"
+</code></pre>
+<h2 class="subtitle is-3" id="sample-file">Sample file</h2>
+<pre><code class="language-yaml">project_name: 'PortalGunFirmware'
+description: 'Project description'
+packages:
+    - api:
+        cflags: ['-std=c++11']
+    - domain:
+    - infrastructure:
+        cflags: ['-std=c++11']
+bits:
+    - cest: '1.0'
+    - mongoose: '6.16'
+    - json: '3.7.3'
+    - fakeit: '2.0.5'
+link_options:
+    libraries: ['pthread']
+actions:
+    deploy: 'echo Deploy!'
+</code></pre>
+
+        </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="columns is-mobile">
+        <div class="column is-offset-2">
+            <div class="content has-text-centered">
+                <p><strong>cpm</strong> by Jordi Sánchez.</p>
+            </div>
+        </div>
+        <div class="column">
+            <a href="https://bulma.io">
+                <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>

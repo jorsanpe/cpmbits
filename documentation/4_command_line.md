@@ -11,14 +11,14 @@ The command line is structured around commands, similar to what you can find in 
 Create a new CPM project. This command is intended for creating new CPM projects from scratch.
 
 **SYNOPSIS**
-<pre><code class="language-bash">  cpm create <project_name>
+<pre><code class="language-bash">  cpm create &lt;project_name&gt;
 </code></pre>
 
 ### `init`
 Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.
 
 **SYNOPSIS**
-<pre><code class="language-bash">  cpm init <project_name>
+<pre><code class="language-bash">  cpm init &lt;project_name&gt;
 </code></pre>
 
 ### `build`
@@ -32,12 +32,12 @@ Build CPM project. The build command creates a CMake recipe in the project root 
 Compile and run project tests. Tests are found recursively starting from the `tests` directory, located in the project root. The tests compilation recipe are placed in the directory `recipes/tests` which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.
 
 **SYNOPSIS**
-<pre><code class="language-bash">  cpm test [<pattern>...]
+<pre><code class="language-bash">  cpm test [&lt;pattern&gt;...]
 </code></pre>
   
 **OPTIONS**
 
-  `<pattern>...` The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.
+  `&lt;pattern&gt;...` The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.
 
 ### `clean`
 Clean CPM project. The clean command basically removes the `recipes` directory, effectively removing any CMake recipes built and all compilation caches.

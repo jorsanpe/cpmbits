@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPM Bits</title>
+  <link rel="stylesheet" href="css/cpmbits.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="css/prism.css" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="js/prism.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar has-shadow is-light" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://cpmbits.com">
+                <img src="img/cpmbits-logo.png" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbar-links" class="navbar-menu">
+            <div class="navbar-start">
+                
+                <a class="navbar-item " href="1_getting_started.html">
+                    Documentation
+                </a>
+                
+                <a class="navbar-item " href="#">
+                    Browse
+                </a>
+                
+                <a class="navbar-item " href="#">
+                    Blog
+                </a>
+                
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="https://github.com/jorsanpe/cpm" target="_blank">
+                            <img src="img/GitHub-Mark-32px.png" height="28">
+                        </a>
+                        <a class="button is-primary" title="User registration only with inviation" disabled>
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth has-background-white-bis">
+          <aside class="menu">
+    <p class="menu-label">
+        Documentation
+    </p>
+    <ul class="menu-list">
+        
+        <li><a href="1_getting_started.html">
+            1 Getting Started
+        </a></li>
+        
+        <li><a href="2_project_descriptor.html">
+            2 Project Descriptor
+        </a></li>
+        
+        <li><a href="3_project_structure.html">
+            3 Project Structure
+        </a></li>
+        
+        <li><a href="4_command_line.html">
+            4 Command Line
+        </a></li>
+        
+        <li><a href="5_why_cpm.html">
+            5 Why Cpm
+        </a></li>
+        
+    </ul>
+</aside>
+        </div>
+        <div class="column content">
+          <h2 class="subtitle is-3" id="installation">Installation</h2>
+<pre><code class="language-bash">pip3 install cpm-cli
+</code></pre>
+<p>CPM depends on <a href="https://cmake.org/">CMake</a> and <a href="https://ninja-build.org/">ninja</a> for the build process.</p>
+<h2 class="subtitle is-3" id="create-a-project">Create a Project</h2>
+<pre><code class="language-bash">cpm create DeathStartLaserBackend
+cd DeathStartLaserBackend
+cpm build
+</code></pre>
+<p>After creating the project, the binary will be available in the project root directory.</p>
+<pre><code class="language-bash">./DeathStartLaserBackend
+</code></pre>
+<h2 class="subtitle is-3" id="manage-dependencies">Manage dependencies</h2>
+<p>CPM manages your project dependencies through CPM-Hub. In order to install a package, simply run:</p>
+<pre><code class="language-bash">cpm install cest
+</code></pre>
+<h3 class="subtitle is-4" id="run-your-tests">Run your tests</h3>
+<pre><code class="language-bash">cpm test
+</code></pre>
+<p>Test sources reside in the <code>tests</code> directory. They are found recursively from the root directory using the expression <code>test_*.cpp</code>.</p>
+
+        </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="columns is-mobile">
+        <div class="column is-offset-2">
+            <div class="content has-text-centered">
+                <p><strong>cpm</strong> by Jordi Sánchez.</p>
+            </div>
+        </div>
+        <div class="column">
+            <a href="https://bulma.io">
+                <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
