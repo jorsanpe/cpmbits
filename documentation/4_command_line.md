@@ -30,7 +30,7 @@ Build CPM project. The build command creates a CMake recipe in the project root 
 
 **OPTIONS**
 
-  `&lt;target&gt;` The target option allows you to compile the application for a specific target. When this option is not specified, `cpm` will use the installed compiler. If this option is specified, then `cpm` will download the corresponding image from the [cpmbits docker repositories](https://hub.docker.com/orgs/cpmbits/repositories) as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names. 
+  `<target>` The target option allows you to compile the application for a specific target. When this option is not specified, `cpm` will use the installed compiler. If this option is specified, then `cpm` will download the corresponding image from the [cpmbits docker repositories](https://hub.docker.com/orgs/cpmbits/repositories) as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names. 
 
 **EXAMPLE**
 
@@ -47,7 +47,7 @@ Compile and run project tests. Tests are found recursively starting from the `te
   
 **OPTIONS**
 
-  `&lt;pattern&gt;...` The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.
+  `<pattern>...` The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.
 
 ### `clean`
 Clean CPM project. The clean command basically removes the `recipes` directory, effectively removing any CMake recipes built and all compilation caches.
@@ -57,17 +57,17 @@ Clean CPM project. The clean command basically removes the `recipes` directory, 
 </code></pre>
 
 ### `publish`
-Publish a CPM project as a plugin in CPM Hub. The publish command packs the project descriptor and its packages into a `zip` file and then uploads it to the CPM Hub plugin repository. The project descriptor file name is changed in the process from `project.yaml` to `plugin.yaml`.
+Publish a CPM project as a bit in CPM Hub. The publish command packs the project descriptor and its packages into a `zip` file and then uploads it to the CPM Hub bit repository. The project descriptor file name is changed in the process from `project.yaml` to `bit.yaml`.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm publish
+<pre><code class="language-bash">cpm publish -s &lt;repository_url&gt;
 </code></pre>
 
 ### `install`
-Install the latest version of the plugin with the given name. The install command downloads the plugin from CPM Hub and unpacks it into the `plugins` directory. It then modifies the `project.yaml` file to include the plugin and the downloaded version.
+If no argument is specified, `cpm` will install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the `bits` directory. When an argument is specified, `cpm` will install the latest version of the specified bit.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm install <plugin_name>
+<pre><code class="language-bash">cpm install [&lt;bit_name&gt;]
 </code></pre>
 
 ### `update`

@@ -343,7 +343,7 @@ a:hover {
 
 code {
   background-color: whitesmoke;
-  color: #f14668;
+  color: #4a4a4a;
   font-size: 0.875em;
   font-weight: normal;
   padding: 0.25em 0.5em 0.25em;
@@ -5122,7 +5122,7 @@ a.list-item {
   color: #363636;
 }
 .menu-list a.is-active {
-  background-color: #3273dc;
+  background-color: #008080;
   color: #fff;
 }
 .menu-list li ul {

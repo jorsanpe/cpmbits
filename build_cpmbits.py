@@ -79,12 +79,9 @@ def render_documentation():
     convert_docs()
     converted_docs = sorted(glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html'))
     documentation_pages = [as_documentation_page(converted_doc) for converted_doc in converted_docs]
-    aside_menu = render_documentation_aside_menu(documentation_pages)
-
-    with open(f'{OUTPUT_DIRECTORY}/documentation.html', 'w+') as stream:
-        stream.write(render_documentation_index_page(aside_menu))
-
+    
     for documentation_page in documentation_pages:
+        aside_menu = render_documentation_aside_menu(documentation_pages, active_page=documentation_page)
         with open(f'{OUTPUT_DIRECTORY}/{documentation_page.href}', 'w+') as stream:
             stream.write(render_documentation_page(documentation_page, aside_menu))
 
@@ -184,10 +181,10 @@ def render_footer():
     return footer
 
 
-def render_documentation_aside_menu(documentation_pages):
+def render_documentation_aside_menu(documentation_pages, active_page):
     with open('templates/components/documentation_aside_menu.html') as stream:
         documentation_aside_menu_payload = stream.read()
-        documentation_aside_menu = Template(documentation_aside_menu_payload).render(documents=documentation_pages)
+        documentation_aside_menu = Template(documentation_aside_menu_payload).render(documents=documentation_pages, active_page=active_page)
     return documentation_aside_menu
 
 

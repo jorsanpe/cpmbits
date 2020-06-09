@@ -74,24 +74,24 @@
     </p>
     <ul class="menu-list">
         
-        <li><a href="1_getting_started.html">
+        <li><a href="1_getting_started.html" class="">
             1 Getting Started
         </a></li>
         
-        <li><a href="2_project_descriptor.html">
+        <li><a href="2_project_descriptor.html" class="">
             2 Project Descriptor
         </a></li>
         
-        <li><a href="3_project_structure.html">
+        <li><a href="3_project_structure.html" class="">
             3 Project Structure
         </a></li>
         
-        <li><a href="4_command_line.html">
+        <li><a href="4_command_line.html" class="is-active">
             4 Command Line
         </a></li>
         
-        <li><a href="5_why_cpm.html">
-            5 Why Cpm
+        <li><a href="5_what_is_cpm.html" class="">
+            5 What Is Cpm
         </a></li>
         
     </ul>
@@ -119,7 +119,7 @@
 <pre><code class="language-bash">cpm build [&lt;target&gt;]
 </code></pre>
 <p><strong>OPTIONS</strong></p>
-<p><code>&amp;lt;target&amp;gt;</code> The target option allows you to compile the application for a specific target. When this option is not specified, <code>cpm</code> will use the installed compiler. If this option is specified, then <code>cpm</code> will download the corresponding image from the <a href="https://hub.docker.com/orgs/cpmbits/repositories">cpmbits docker repositories</a> as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names.</p>
+<p><code>&lt;target&gt;</code> The target option allows you to compile the application for a specific target. When this option is not specified, <code>cpm</code> will use the installed compiler. If this option is specified, then <code>cpm</code> will download the corresponding image from the <a href="https://hub.docker.com/orgs/cpmbits/repositories">cpmbits docker repositories</a> as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names.</p>
 <p><strong>EXAMPLE</strong></p>
 <pre><code class="language-bash">cpm build ubuntu:20.04
 cpm build raspberrypi4:64
@@ -130,22 +130,22 @@ cpm build raspberrypi4:64
 <pre><code class="language-bash">cpm test [&lt;pattern&gt;...]
 </code></pre>
 <p><strong>OPTIONS</strong></p>
-<p><code>&amp;lt;pattern&amp;gt;...</code> The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.</p>
+<p><code>&lt;pattern&gt;...</code> The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.</p>
 <h3 class="subtitle is-4" id="clean"><code>clean</code></h3>
 <p>Clean CPM project. The clean command basically removes the <code>recipes</code> directory, effectively removing any CMake recipes built and all compilation caches.</p>
 <strong>SYNOPSIS</strong>
 <pre><code class="language-bash">cpm clean
 </code></pre>
 <h3 class="subtitle is-4" id="publish"><code>publish</code></h3>
-<p>Publish a CPM project as a plugin in CPM Hub. The publish command packs the project descriptor and its packages into a <code>zip</code> file and then uploads it to the CPM Hub plugin repository. The project descriptor file name is changed in the process from <code>project.yaml</code> to <code>plugin.yaml</code>.</p>
+<p>Publish a CPM project as a bit in CPM Hub. The publish command packs the project descriptor and its packages into a <code>zip</code> file and then uploads it to the CPM Hub bit repository. The project descriptor file name is changed in the process from <code>project.yaml</code> to <code>bit.yaml</code>.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">cpm publish
+<pre><code class="language-bash">cpm publish -s &lt;repository_url&gt;
 </code></pre>
 <h3 class="subtitle is-4" id="install"><code>install</code></h3>
-<p>Install the latest version of the plugin with the given name. The install command downloads the plugin from CPM Hub and unpacks it into the <code>plugins</code> directory. It then modifies the <code>project.yaml</code> file to include the plugin and the downloaded version.</p>
+<p>If no argument is specified, <code>cpm</code> will install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the <code>bits</code> directory. When an argument is specified, <code>cpm</code> will install the latest version of the specified bit.</p>
 <strong>SYNOPSIS</strong>
-<pre><code class="language-bash">cpm install <plugin_name>
-</plugin_name></code></pre>
+<pre><code class="language-bash">cpm install [&lt;bit_name&gt;]
+</code></pre>
 <h3 class="subtitle is-4" id="update"><code>update</code></h3>
 <p>This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.</p>
 <strong>SYNOPSIS</strong>

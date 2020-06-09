@@ -74,24 +74,24 @@
     </p>
     <ul class="menu-list">
         
-        <li><a href="1_getting_started.html">
+        <li><a href="1_getting_started.html" class="">
             1 Getting Started
         </a></li>
         
-        <li><a href="2_project_descriptor.html">
+        <li><a href="2_project_descriptor.html" class="is-active">
             2 Project Descriptor
         </a></li>
         
-        <li><a href="3_project_structure.html">
+        <li><a href="3_project_structure.html" class="">
             3 Project Structure
         </a></li>
         
-        <li><a href="4_command_line.html">
+        <li><a href="4_command_line.html" class="">
             4 Command Line
         </a></li>
         
-        <li><a href="5_why_cpm.html">
-            5 Why Cpm
+        <li><a href="5_what_is_cpm.html" class="">
+            5 What Is Cpm
         </a></li>
         
     </ul>
@@ -101,50 +101,93 @@
           <h1 class="title is-2" id="project-descriptor">Project Descriptor</h1>
 <p>The project descriptor is a YAML file with the name <code>project.yaml</code> that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a CPM project.</p>
 <h2 class="subtitle is-3" id="elements-of-the-project-descriptor">Elements of the project descriptor</h2>
-<h3 class="subtitle is-4" id="name-string"><code>name: string</code></h3>
-<p>The project name field is a string identifying the project. The application will be compiled into a binary file with this name. The <code>name</code> should not contain any spaces.</p>
-<h3 class="subtitle is-4" id="description-string"><code>description: string</code></h3>
-<p>This field has currently no practical purpose other than allowing the user to include a larger description of the project.</p>
-<h3 class="subtitle is-4" id="version-string"><code>version: string</code></h3>
-<p>This field is required when the current project is intended to be published in CPM Hub. The version will be used to publish the plugin accordingly. When not present, the <code>version</code> field defaults to <code>"0.1"</code>.</p>
-<h3 class="subtitle is-4" id="packages-object"><code>packages: object</code></h3>
-<p>This section contains the list of packages of the project. A <code>package</code> in CPM is the root directory of a set of source files. For example, when declaring an <code>api</code> package, CPM will recursively search <code>*.c</code> and <code>*.cpp</code> source files in the directory with that name.</p>
-<h3 class="subtitle is-4" id="packages.name-object"><code>packages.{name}: object</code></h3>
-<p>Each package has to be declared in the <code>packages</code> section with the same name as its root folder. For example, for declaring the <code>api/json</code> directory as a package, the project descriptor should be:</p>
-<pre><code class="language-yaml">packages:
-    api/json:
-</code></pre>
-<h3 class="subtitle is-4" id="packages.name.cflags-string"><code>packages.{name}.cflags: [string]</code></h3>
-<p>Packages can be assigned specific compilation flags with the <code>cflags</code> property. This allows, among other things, mixing C99 and C++11 code in the same executable.</p>
-<h3 class="subtitle is-4" id="bits-object"><code>bits: object</code></h3>
-<p>This section is used to declare which <code>bits</code> the project depends on. The entries in the <code>bits</code> section will be used to access CPM Hub and download the declared version of each bit when updating the project.</p>
-<h3 class="subtitle is-4" id="compile_flags-string"><code>compile_flags: [string]</code></h3>
-<p>This property allows the user to configure the global compilation options. This flags will only apply to the project sources.</p>
-<h3 class="subtitle is-4" id="link_options-object"><code>link_options: object</code></h3>
-<p>This property allows the user to define the link options of the binary.</p>
-<h3 class="subtitle is-4" id="link_options.libraries-string"><code>link_options.libraries: [string]</code></h3>
-<p>The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake <code>target_link_libraries</code> option with the list expanded.</p>
-<h3 class="subtitle is-4" id="actions-object"><code>actions: object</code></h3>
-<p>The user can define project specific actions in this section.</p>
-<h3 class="subtitle is-4" id="actions.name-string"><code>actions.{name}: string</code></h3>
-<p>Each key in the actions section is the action alias. The value is a string with the command to be executed for that action:</p>
-<pre><code class="language-yaml">actions:
-    deploy: "echo Deploy!"
-</code></pre>
+<table>
+<colgroup>
+<col style="width: 51%"/>
+<col style="width: 48%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>name: string</code></td>
+<td>The project name field is a string identifying the project. The application will be compiled into a binary file with this name. The <code>name</code> should not contain any spaces.</td>
+</tr>
+<tr class="even">
+<td><code>description: string</code></td>
+<td>This field has currently no practical purpose other than allowing the user to include a larger description of the project.</td>
+</tr>
+<tr class="odd">
+<td><code>version: string</code></td>
+<td>This field is required when the current project is intended to be published in CPM Hub. The version will be used to publish the plugin accordingly. When not present, the <code>version</code> field defaults to <code>"0.1"</code>.</td>
+</tr>
+<tr class="even">
+<td><code>packages: [object]</code></td>
+<td>This section contains the list of packages of the project. A <code>package</code> in CPM is the root directory of a set of source files. For example, when declaring an <code>api</code> package, CPM will recursively search <code>*.c</code> and <code>*.cpp</code> source files in the directory with that name.</td>
+</tr>
+<tr class="odd">
+<td><code>packages.{name}: object</code></td>
+<td>Each package has to be declared in the <code>packages</code> section with the same name as its root folder.</td>
+</tr>
+<tr class="even">
+<td><code>packages.{name}.cflags: [string]</code></td>
+<td>Packages can be assigned specific compilation flags with the <code>cflags</code> property. This allows, among other things, mixing C99 and C++11 code in the same executable.</td>
+</tr>
+<tr class="odd">
+<td><code>bits: object</code></td>
+<td>This section is used to declare which <code>bits</code> the project depends on. The entries in the <code>bits</code> section will be used to access CPM Hub and download the declared version of each bit when updating the project.</td>
+</tr>
+<tr class="even">
+<td><code>bits.{name}: string</code></td>
+<td>Each declared bit is an entry in the <code>bits</code> object with the name of the bit as the key and the bit version as the value.</td>
+</tr>
+<tr class="odd">
+<td><code>test_bits: object</code><br/><code>test_bits.{name}: string</code></td>
+<td>The <code>test_bits</code> section is treated exactly the same as the <code>bits</code> section. The main difference is that, when installing a bit that has transitive dependencies, the <code>test_bits</code> won’t be followed.</td>
+</tr>
+<tr class="even">
+<td><code>compile_flags: [string]</code></td>
+<td>This property allows the user to configure the global compilation options. This flags will only apply to the project sources.</td>
+</tr>
+<tr class="odd">
+<td><code>link_options: object</code></td>
+<td>This property allows the user to define the link options of the binary.</td>
+</tr>
+<tr class="even">
+<td><code>link_options.libraries: [string]</code></td>
+<td>The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake <code>target_link_libraries</code> option with the list expanded.</td>
+</tr>
+<tr class="odd">
+<td><code>actions: object</code></td>
+<td>The user can define project specific actions in this section.</td>
+</tr>
+<tr class="even">
+<td><code>actions.{name}: string</code></td>
+<td>Each key in the actions section is the action alias. The value is a string with the command to be executed for that action.</td>
+</tr>
+</tbody>
+</table>
 <h2 class="subtitle is-3" id="sample-file">Sample file</h2>
-<pre><code class="language-yaml">project_name: 'PortalGunFirmware'
+<pre><code class="language-yaml">name: 'PortalGunFirmware'
 description: 'Project description'
+version: '1.0'
 packages:
     - api:
         cflags: ['-std=c++11']
     - domain:
     - infrastructure:
         cflags: ['-std=c++11']
+compile_flags: ['-g']
 bits:
-    - cest: '1.0'
-    - mongoose: '6.16'
-    - json: '3.7.3'
-    - fakeit: '2.0.5'
+    mongoose: '6.16'
+    json: '3.7.3'
+test_bits:
+    cest: '1.0'
+    fakeit: '2.0.5'
 link_options:
     libraries: ['pthread']
 actions:
