@@ -1,5 +1,3 @@
-# Project Structure
-
 This section describes how CPM projects are managed. When in doubt, please refer to [CPM Hub](https://github.com/jorsanpe/cpm-hub) for reference, as CPM Hub is based on CPM.
 
 CPM projects are structured as follows:
@@ -20,11 +18,11 @@ Project/
                 cest.h
 ```
 
-## `project.yaml`
+### `project.yaml`
 
 The project description is stored in this file following the [CPM project schema](cpm-project-schema). This file contains the description of the project, the packages that compose the source code, the `bits` it depends on and the rules for specific targets.
 
-## `main.cpp`
+### `main.cpp`
 
 The `main.cpp` file contains the `main` function of the application. This file is required to exist in the project root directory and contain the implementation of the `main` function.
 
@@ -69,6 +67,3 @@ When testing, CPM will find for files matching the `test_*.cpp` pattern and will
 
 CPM is developed jointly with CPM Hub, which is both the bits repository and the first CPM project. In turn, CPM Hub is using [Cest](https://github.com/cegonse/cest), so there's good synergy between them. 
 
-## Bits
-
-Bits are a major feature of CPM. They allow sharing code similar to what other modern tools are doing like `pip` or `npm`. This feature is currently under development and will be served by CPM Hub instances.

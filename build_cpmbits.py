@@ -48,6 +48,7 @@ def main():
     shutil.copytree('resources/js', f'{OUTPUT_DIRECTORY}/js')
     shutil.copytree('resources/img', f'{OUTPUT_DIRECTORY}/img')
     shutil.copy('resources/img/favicon.ico', f'{OUTPUT_DIRECTORY}')
+    shutil.copy('resources/CNAME', f'{OUTPUT_DIRECTORY}')
 
     generate_css()
 

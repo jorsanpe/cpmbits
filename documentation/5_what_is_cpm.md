@@ -1,5 +1,3 @@
-# What is CPM
-
 CPM is born as a tool for the modernization of C and C++ based projects. Modern languages have strong development frameworks and really amazing project management tools. Combined with CPM Hub, CPM will enable an ecosystem for creating projects in a much easier way, reducing the high entrance fee required for developing in multi-target environments. It will provide the means for sharing *bits* via source code.
 
 ### Ease of Use

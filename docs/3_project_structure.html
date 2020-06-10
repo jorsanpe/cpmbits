@@ -98,8 +98,7 @@
 </aside>
         </div>
         <div class="column content">
-          <h1 class="title is-2" id="project-structure">Project Structure</h1>
-<p>This section describes how CPM projects are managed. When in doubt, please refer to <a href="https://github.com/jorsanpe/cpm-hub">CPM Hub</a> for reference, as CPM Hub is based on CPM.</p>
+          <p>This section describes how CPM projects are managed. When in doubt, please refer to <a href="https://github.com/jorsanpe/cpm-hub">CPM Hub</a> for reference, as CPM Hub is based on CPM.</p>
 <p>CPM projects are structured as follows:</p>
 <pre><code>Project/
     main.cpp
@@ -114,9 +113,9 @@
             bit.yaml
             cest/
                 cest.h</code></pre>
-<h2 class="subtitle is-3" id="project.yaml"><code>project.yaml</code></h2>
+<h3 class="subtitle is-4" id="project.yaml"><code>project.yaml</code></h3>
 <p>The project description is stored in this file following the <a href="cpm-project-schema">CPM project schema</a>. This file contains the description of the project, the packages that compose the source code, the <code>bits</code> it depends on and the rules for specific targets.</p>
-<h2 class="subtitle is-3" id="main.cpp"><code>main.cpp</code></h2>
+<h3 class="subtitle is-4" id="main.cpp"><code>main.cpp</code></h3>
 <p>The <code>main.cpp</code> file contains the <code>main</code> function of the application. This file is required to exist in the project root directory and contain the implementation of the <code>main</code> function.</p>
 <h2 class="subtitle is-3" id="packages">Packages</h2>
 <p>Packages allow the user to structure the code however needed. By design, we’re removing the <code>src &lt;-&gt; include</code> separation. Instead, source code and header files are stored next to each other, creating a proper structure for packages. A <em>package</em> in CPM is the root of a set of source files with no particular structure. The package sources are found recursively from the package root.</p>
@@ -139,8 +138,6 @@ packages:
 <h2 class="subtitle is-3" id="tests">Tests</h2>
 <p>When testing, CPM will find for files matching the <code>test_*.cpp</code> pattern and will consider them as test suites. Each test suite will be compiled separately as a binary application and run. CPM leaves the choice of the testing framework to the developer.</p>
 <p>CPM is developed jointly with CPM Hub, which is both the bits repository and the first CPM project. In turn, CPM Hub is using <a href="https://github.com/cegonse/cest">Cest</a>, so there’s good synergy between them.</p>
-<h2 class="subtitle is-3" id="bits-1">Bits</h2>
-<p>Bits are a major feature of CPM. They allow sharing code similar to what other modern tools are doing like <code>pip</code> or <code>npm</code>. This feature is currently under development and will be served by CPM Hub instances.</p>
 
         </div>
     </div>

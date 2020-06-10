@@ -1,5 +1,3 @@
-# cpm Command Line
-
 The command line is structured around commands, similar to what you can find in other tools (e.g. Git):
 
 <pre><code class="language-bash">cpm &lt;action&gt; [options]
