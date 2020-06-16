@@ -134,7 +134,7 @@ packages:
 <p>Once the package has been created, the parent path of the package will be included with ‘-I’ flag. This way, a package like the one declared above can be used in the code with:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include </span><span class="im">&lt;api/api.h&gt;</span></a></code></pre></div>
 <h2 class="subtitle is-3" id="bits">Bits</h2>
-<p>CPM <code>bits</code> are the main way of sharing code between CPM projects.</p>
+<p>CPM <code>bits</code> are the main way of sharing code between CPM projects. All bits are installed under the <code>bits</code> directory. That directory should not be included as part of the project VCS, as it’s automatically managed by <code>cpm</code>.</p>
 <h2 class="subtitle is-3" id="tests">Tests</h2>
 <p>When testing, CPM will find for files matching the <code>test_*.cpp</code> pattern and will consider them as test suites. Each test suite will be compiled separately as a binary application and run. CPM leaves the choice of the testing framework to the developer.</p>
 <p>CPM is developed jointly with CPM Hub, which is both the bits repository and the first CPM project. In turn, CPM Hub is using <a href="https://github.com/cegonse/cest">Cest</a>, so there’s good synergy between them.</p>

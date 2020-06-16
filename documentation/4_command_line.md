@@ -75,6 +75,6 @@ This command is useful for integration with some IDEs. It generates the would-be
 <pre><code class="language-bash">cpm update
 </code></pre>
 
-# Project Actions
+## Project Actions
 
 The user can define project specific actions in the project descriptor. This is done through the `actions` section described in the [project descriptor](https://github.com/jorsanpe/cpm/wiki/Project-Descriptor). Actions defined there will appear in the command line.

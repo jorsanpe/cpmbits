@@ -59,7 +59,7 @@ Once the package has been created, the parent path of the package will be includ
 
 ## Bits
 
-CPM `bits` are the main way of sharing code between CPM projects. 
+CPM `bits` are the main way of sharing code between CPM projects. All bits are installed under the `bits` directory. That directory should not be included as part of the project VCS, as it's automatically managed by `cpm`. 
 
 ## Tests
 
