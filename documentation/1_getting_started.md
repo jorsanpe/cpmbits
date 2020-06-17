@@ -24,7 +24,7 @@ CPM manages your project dependencies through CPM-Hub. In order to install a pac
 <pre><code class="language-bash">cpm install cest
 </code></pre>
 
-### Run your tests
+## Run your tests
 
 <pre><code class="language-bash">cpm test
 </code></pre>

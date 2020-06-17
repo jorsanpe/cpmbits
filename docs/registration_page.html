@@ -67,59 +67,51 @@
   <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-one-fifth has-background-white-bis">
-          <aside class="menu">
-    <p class="menu-label">
-        Documentation
-    </p>
-    <ul class="menu-list">
-        
-        <li><a href="1_getting_started.html" class="is-active">
-            1 Getting Started
-        </a></li>
-        
-        <li><a href="2_project_descriptor.html" class="">
-            2 Project Descriptor
-        </a></li>
-        
-        <li><a href="3_project_structure.html" class="">
-            3 Project Structure
-        </a></li>
-        
-        <li><a href="4_command_line.html" class="">
-            4 Command Line
-        </a></li>
-        
-        <li><a href="5_what_is_cpm.html" class="">
-            5 What Is Cpm
-        </a></li>
-        
-    </ul>
-</aside>
+        <div class="column is-4 is-offset-4">
+          <div class="card">
+    <div class="card-content">
+        <p class="title">
+            Create your account
+        </p>
+        <div class="field">
+            <label class="label">Invitation Token</label>
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Invitation Token">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-ticket-alt"></i>
+                </span>
+            </p>
         </div>
-        <div class="column content">
-          <h2 class="subtitle is-3" id="installation">Installation</h2>
-<pre><code class="language-bash">pip3 install cpm-cli
-</code></pre>
-<p>CPM depends on <a href="https://cmake.org/">CMake</a> and <a href="https://ninja-build.org/">ninja</a> for the build process.</p>
-<h2 class="subtitle is-3" id="create-a-project">Create a Project</h2>
-<pre><code class="language-bash">cpm create DeathStartLaserBackend
-cd DeathStartLaserBackend
-cpm build
-</code></pre>
-<p>After creating the project, the binary will be available in the project root directory.</p>
-<pre><code class="language-bash">./DeathStartLaserBackend
-</code></pre>
-<h2 class="subtitle is-3" id="manage-dependencies">Manage dependencies</h2>
-<p>CPM manages your project dependencies through CPM-Hub. In order to install a package, simply run:</p>
-<pre><code class="language-bash">cpm install cest
-</code></pre>
-<h2 class="subtitle is-3" id="run-your-tests">Run your tests</h2>
-<pre><code class="language-bash">cpm test
-</code></pre>
-<p>Test sources reside in the <code>tests</code> directory. They are found recursively from the root directory using the expression <code>test_*.cpp</code>.</p>
+        <div class="field">
+            <label class="label">Email</label>
+            <p class="control has-icons-left has-icons-right">
+                <input class="input" type="email" placeholder="Email">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <label class="label">Password</label>
+            <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Password">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control">
+                <button class="button is-success">
+                    Sign Up
+                </button>
+            </p>
+        </div>
+    </div>
+</div>
 
         </div>
+      </div>
     </div>
   </section>
 

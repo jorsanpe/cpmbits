@@ -44,6 +44,9 @@ def main():
 
     render_documentation()
 
+    with open(f'{OUTPUT_DIRECTORY}/registration_page.html', 'w+') as stream:
+        stream.write(render_registration_page())
+    
     shutil.copytree('resources/css', f'{OUTPUT_DIRECTORY}/css')
     shutil.copytree('resources/js', f'{OUTPUT_DIRECTORY}/js')
     shutil.copytree('resources/img', f'{OUTPUT_DIRECTORY}/img')
@@ -152,6 +155,22 @@ def convert_docs():
             ['pandoc', '-f', 'markdown', '-t', 'html5', doc, '-o', f'{DOCS_OUTPUT_DIRECTORY}/{file_basename(doc)}.html']
         )
 
+
+def render_registration_page():
+    menu_items = [
+        MenuItem('Documentation', False, "1_getting_started.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
+    ]
+    head = render_head()
+    navbar = render_navbar(menu_items)
+    footer = render_footer()
+
+    with open('templates/components/registration_form.html') as stream:
+        registration_form = stream.read()
+    with open('templates/views/registration_page.html', 'r') as stream:
+        contents = stream.read()
+    return Template(contents).render(head=head, navbar=navbar, registration_form=registration_form, footer=footer)
 
 def generate_css():
     subprocess.run(['sass', f'bulma-customization/cpmbits.scss:{OUTPUT_DIRECTORY}/css/cpmbits.css'])
