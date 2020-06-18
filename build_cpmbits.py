@@ -12,6 +12,8 @@ from jinja2 import Template
 OUTPUT_DIRECTORY = 'docs'
 DOCS_OUTPUT_DIRECTORY = 'docs_output'
 DOCS_DIRECTORY = 'documentation'
+POSTS_DIRECTORY = 'posts'
+POSTS_OUTPUT_DIRECTORY = 'blog_output'
 
 
 @dataclass
@@ -44,9 +46,8 @@ def main():
 
     render_documentation()
 
-    with open(f'{OUTPUT_DIRECTORY}/registration_page.html', 'w+') as stream:
-        stream.write(render_registration_page())
-    
+    render_registration_story()
+
     shutil.copytree('resources/css', f'{OUTPUT_DIRECTORY}/css')
     shutil.copytree('resources/js', f'{OUTPUT_DIRECTORY}/js')
     shutil.copytree('resources/img', f'{OUTPUT_DIRECTORY}/img')
@@ -156,6 +157,17 @@ def convert_docs():
         )
 
 
+def render_registration_story():
+    with open(f'{OUTPUT_DIRECTORY}/registration_page.html', 'w+') as stream:
+        stream.write(render_registration_page())
+
+    with open(f'{OUTPUT_DIRECTORY}/registration_failure.html', 'w+') as stream:
+        stream.write(render_registration_failure())
+
+    with open(f'{OUTPUT_DIRECTORY}/registration_success.html', 'w+') as stream:
+        stream.write(render_registration_success())
+
+
 def render_registration_page():
     menu_items = [
         MenuItem('Documentation', False, "1_getting_started.html"),
@@ -170,7 +182,83 @@ def render_registration_page():
         registration_form = stream.read()
     with open('templates/views/registration_page.html', 'r') as stream:
         contents = stream.read()
+
     return Template(contents).render(head=head, navbar=navbar, registration_form=registration_form, footer=footer)
+
+
+def render_registration_failure():
+    menu_items = [
+        MenuItem('Documentation', False, "1_getting_started.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
+    ]
+    head = render_head()
+    navbar = render_navbar(menu_items)
+    footer = render_footer()
+
+    with open('templates/views/registration_failure.html', 'r') as stream:
+        contents = stream.read()
+    return Template(contents).render(head=head, navbar=navbar, footer=footer)
+
+
+def render_registration_success():
+    menu_items = [
+        MenuItem('Documentation', False, "1_getting_started.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
+    ]
+    head = render_head()
+    navbar = render_navbar(menu_items)
+    footer = render_footer()
+
+    with open('templates/views/registration_success.html', 'r') as stream:
+        contents = stream.read()
+    return Template(contents).render(head=head, navbar=navbar, footer=footer)
+
+
+def render_blog():
+    convert_posts()
+    converted_docs = sorted(glob.glob(f'{DOCS_OUTPUT_DIRECTORY}/*.html'))
+    blog_posts = [as_blog_post(converted_doc) for converted_doc in converted_docs]
+    
+    for blog_post in blog_posts:
+        aside_menu = render_documentation_aside_menu(blog_posts, active_page=blog_post)
+        with open(f'{OUTPUT_DIRECTORY}/{blog_post.href}', 'w+') as stream:
+            stream.write(render_blog_post(blog_post, aside_menu))
+
+
+def as_blog_post(converted_doc):
+    documentation_page = DocumentationPage()
+    documentation_page.title = document_page_title(converted_doc)
+    documentation_page.href = f'{os.path.basename(converted_doc)}'
+    with open(converted_doc, 'r') as stream:
+        raw_contents = stream.read()
+    documentation_page.contents = customize_documentation_page_html(raw_contents)
+    return documentation_page
+
+
+def render_blog_post(blog_post, aside_menu):
+    menu_items = [
+        MenuItem('Documentation', False, "1_getting_started.html"),
+        MenuItem('Browse', False, "#"),
+        MenuItem('Blog', False, "#"),
+    ]
+    head = render_head()
+    navbar = render_navbar(menu_items)
+    footer = render_footer()
+
+    with open('templates/views/blog_post.html', 'r') as stream:
+        contents = stream.read()
+    return Template(contents).render(head=head, navbar=navbar, aside_menu=aside_menu, doc=documentation_page, footer=footer)
+
+
+def convert_posts():
+    docs = glob.glob(f'{POSTS_DIRECTORY}/*.md')
+    for doc in docs:
+        subprocess.run(
+            ['pandoc', '-f', 'markdown', '-t', 'html5', doc, '-o', f'{POSTS_OUTPUT_DIRECTORY}/{file_basename(doc)}.html']
+        )
+
 
 def generate_css():
     subprocess.run(['sass', f'bulma-customization/cpmbits.scss:{OUTPUT_DIRECTORY}/css/cpmbits.css'])
