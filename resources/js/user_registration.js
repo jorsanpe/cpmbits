@@ -56,7 +56,7 @@ registerButton.addEventListener('click', () => {
         password: password,
         invitation_token: document.querySelector('#registration_form_invitation_token').value,
     }
-    fetch('http://localhost:8000/users', {
+    fetch('http://repo.cpmbits.com:8000/users', {
         method: 'POST',
         mode: 'cors',
         headers: {

@@ -18,6 +18,8 @@ The project descriptor is a YAML file with the name `project.yaml` that contains
 | `link_options.libraries: [string]` | The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake `target_link_libraries` option with the list expanded. |
 | `actions: object` | The user can define project specific actions in this section. |
 | `actions.{name}: string` | Each key in the actions section is the action alias. The value is a string with the command to be executed for that action. |
+| `targets: object`<br>`targets.{name}: object`<br>`targets.{name}.image: string` | The `targets` section is currently used to define a custom Docker image from which to build the application. |
+
 
 ## Sample file
 
@@ -41,4 +43,7 @@ link_options:
     libraries: ['pthread']
 actions:
     deploy: 'echo Deploy!'
+targets:
+    ubuntu:
+        image: 'ubuntu:18.04'
 </code></pre>
