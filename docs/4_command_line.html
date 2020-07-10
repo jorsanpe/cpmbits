@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/cpmbits.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="css/prism.css" rel="stylesheet">
+  <link href="css/bulma-divider.min.css" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="js/prism.js"></script>
 </head>
@@ -90,8 +91,8 @@
             4 Command Line
         </a></li>
         
-        <li><a href="5_what_is_cpm.html" class="">
-            5 What Is Cpm
+        <li><a href="5_bit_development.html" class="">
+            5 Bit Development
         </a></li>
         
     </ul>
@@ -107,11 +108,15 @@
 <strong>SYNOPSIS</strong>
 <pre><code class="language-bash">cpm create &lt;project_name&gt;
 </code></pre>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="init"><code>init</code></h3>
 <p>Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.</p>
 <strong>SYNOPSIS</strong>
 <pre><code class="language-bash">cpm init &lt;project_name&gt;
 </code></pre>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="build"><code>build</code></h3>
 <p>Build CPM project. The build command creates a CMake recipe in the project root directory. It then calls <code>cmake</code> and <code>ninja</code> to build the project using the <code>build</code> directory for the output files. The output binary will have the same name as the <code>project_name</code> field in the project descriptor and it will be placed in the project root directory.</p>
 <strong>SYNOPSIS</strong>
@@ -123,6 +128,8 @@
 <pre><code class="language-bash">cpm build ubuntu:20.04
 cpm build raspberrypi4:64
 </code></pre>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="test"><code>test</code></h3>
 <p>Compile and run project tests. Tests are found recursively starting from the <code>tests</code> directory, located in the project root. The tests compilation recipe are placed in the directory <code>recipes/tests</code> which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.</p>
 <strong>SYNOPSIS</strong>
@@ -130,6 +137,8 @@ cpm build raspberrypi4:64
 </code></pre>
 <p><strong>OPTIONS</strong></p>
 <p><code>&lt;pattern&gt;...</code> The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.</p>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="clean"><code>clean</code></h3>
 <p>Clean CPM project. The clean command basically removes the <code>recipes</code> directory, effectively removing any CMake recipes built and all compilation caches.</p>
 <strong>SYNOPSIS</strong>
@@ -140,11 +149,15 @@ cpm build raspberrypi4:64
 <strong>SYNOPSIS</strong>
 <pre><code class="language-bash">cpm publish -s &lt;repository_url&gt;
 </code></pre>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="install"><code>install</code></h3>
 <p>If no argument is specified, <code>cpm</code> will install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the <code>bits</code> directory. When an argument is specified, <code>cpm</code> will install the latest version of the specified bit.</p>
 <strong>SYNOPSIS</strong>
 <pre><code class="language-bash">cpm install [&lt;bit_name&gt;]
 </code></pre>
+<div class="divider" data-content="">
+</div>
 <h3 class="subtitle is-4" id="update"><code>update</code></h3>
 <p>This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.</p>
 <strong>SYNOPSIS</strong>

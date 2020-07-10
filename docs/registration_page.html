@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/cpmbits.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="css/prism.css" rel="stylesheet">
+  <link href="css/bulma-divider.min.css" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="js/prism.js"></script>
 </head>
@@ -75,39 +76,42 @@
         </p>
         <div class="field">
             <label class="label">Username</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" id="registration_form_username" type="text" placeholder="Username">
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" id="registration_form_username" type="text" placeholder="Username" required pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
-            </p>
+                <p id="registration_form_username_status" class="help"></p>
+            </div>
         </div>
-        <div class="field">
+        <div class="field" id="registration_form_email_field">
             <label class="label">Email</label>
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" id="registration_form_email" type="email" placeholder="Email">
+            <div class="control has-icons-left has-icons-right" id="registration_form_email_control">
+                <input class="input" id="registration_form_email" type="email" placeholder="Email" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                 </span>
-            </p>
+                <p id="registration_form_email_status" class="help"></p>
+            </div>
         </div>
-        <div class="field">
+        <div class="field" id="registration_form_password_field">
             <label class="label">Password</label>
-            <p class="control has-icons-left">
-                <input class="input" id="registration_form_password" type="password" placeholder="Password">
+            <div class="control has-icons-left has-icons-right" id="registration_form_password_control">
+                <input class="input" id="registration_form_password" type="password" placeholder="Password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                 <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                 </span>
-            </p>
+                <p id="registration_form_password_status" class="help"></p>
+            </div>
         </div>
         <div class="field">
             <label class="label">Invitation Token</label>
-            <p class="control has-icons-left">
+            <div class="control has-icons-left">
                 <input class="input" id="registration_form_invitation_token" type="text" placeholder="Invitation Token">
                 <span class="icon is-small is-left">
                     <i class="fa fa-ticket-alt"></i>
                 </span>
-            </p>
+            </div>
         </div>
         <div class="field">
             <p class="control">
