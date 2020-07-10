@@ -169,6 +169,10 @@
 <td><code>actions.{name}: string</code></td>
 <td>Each key in the actions section is the action alias. The value is a string with the command to be executed for that action.</td>
 </tr>
+<tr class="odd">
+<td><code>targets: object</code><br/><code>targets.{name}: object</code><br/><code>targets.{name}.image: string</code></td>
+<td>The <code>targets</code> section is currently used to define a custom Docker image from which to build the application.</td>
+</tr>
 </tbody>
 </table>
 <h2 class="subtitle is-3" id="sample-file">Sample file</h2>
@@ -192,6 +196,9 @@ link_options:
     libraries: ['pthread']
 actions:
     deploy: 'echo Deploy!'
+targets:
+    ubuntu:
+        image: 'ubuntu:18.04'
 </code></pre>
 
         </div>
