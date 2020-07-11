@@ -43,11 +43,11 @@ project.yaml
 main.cpp
 ```
 
-The `project.yaml</code> is the project descriptor and it contains the project configuration as defined by the user. The <code>main.cpp` file is the program entry point and at the time of writing this tutorial it is required to be at the project root (the reasons for this are beyond the scope of this tutorial).
+The `project.yaml` file is the project descriptor and it contains the project configuration as defined by the user. The `main.cpp` file is the program entry point and at the time of writing this tutorial it is required to be at the project root (the reasons for this are beyond the scope of this tutorial).
 
 ### Packages
 
-Projects in CPM are structured around <strong>packages</strong>. A package is a collection of (hopefully) related code that can be addressed from the package root. They are analogous to Python or Java packages. Let's see how they work with an example of a package named `authentication`.
+Projects in CPM are structured around <strong>packages</strong>. A package is a collection of (hopefully) related code that can be addressed from the package root. They try to be analogous to Python or Java packages. Let's see how they work with an example of a package named `authentication`.
 
 First, we have to create the package root directory:
 
@@ -76,7 +76,7 @@ By design, both source and header files are placed in the same directory. Now, i
 #include <authentication/Authenticator.h>
 ```
 
-CPM will automatically solve the include directories required to make this work. Packages can be declared at any level. For example, if the package is not contained directly under the root directory:
+CPM will automatically solve the include directories required to make this work. Packages can be declared at any level. For example, if the package root directory is not contained directly under the root directory:
 
 ```
 domain/authentication/Authenticator.cpp
@@ -101,13 +101,13 @@ Nesting packages (packages inside other packages) is currently not supported.
 
 ### Bits
 
-Bits are the way to share code with CPM. Bits are shared as source code and installed in the directory `bits`. 
+Bits are the way to share code with CPM. Bits are shared as source code and installed in the directory `bits`. Bits should not be included as part of the project repository. 
 
-Let's say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin.
+There are two ways in which you can install a bit. First, you can simply install them from command line. Let's say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin.
 
 ```
 cpm install cest
-``` 
+```
 
 After having run this command, the project structure is updated:
 
@@ -119,6 +119,38 @@ authentication/Authenticator.h
 bits/cest/plugin.yaml
 bits/cest/cest/cest.h
 ```
+
+This is a fast way of installing a dependency. However, the dependency is not recorded anywhere so if someone else downloads your project, the bit dependencies will not be known. In order to keep track of the project dependencies, the bits can be declared in the project descriptor:
+
+```
+name: awesome-project
+packages:
+    domain/authentication:
+bits:
+    cest: '1.0'
+```
+
+The bits declared in the project descriptor can be installed all at once using the following command from the project root:
+
+```
+cpm install
+```
+
+This command will detect which bits are not installed and will automatically download and install them. 
+
+### Test Bits
+
+Projects can depend on bits only for testing purposes. In this case, those bits can be declared as `test_bits`:
+
+```
+name: awesome-project
+packages:
+    domain/authentication:
+test_bits:
+    cest: '1.0'
+```
+
+This is particularly useful when developing bits. When installing a bit, the dependencies will be installed transitively. For example, if the project depends on bit A and bit A depends on bit B, then CPM will install transitively bit B when installing bit A. Imagine that now, bit A depends on <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> for testing. We don't want that dependency to permeate through to our project so bit A should declare `Cest` as a `test_bit`.
 
 ### Testing
 

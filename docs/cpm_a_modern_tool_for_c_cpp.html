@@ -65,7 +65,7 @@
                             </span>
                         </div>
                         <div class="control">
-                            <a class="button is-primary">
+                            <a class="button is-primary" id="search_query_submit">
                                 Search
                             </a>
                         </div>
@@ -92,7 +92,7 @@
         <div class="column content">
           <h1 class="title is-2" id="cpm-a-modern-tool-for-cc">CPM: A Modern Tool for C/C++</h1>
 <p>Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example <code>pip</code>; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a “dependency hub”; others like Java, Ruby or JavaScript also have their own ecosystems.</p>
-<p>The main goal of CPM is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the plugins repository.</p>
+<p>The main goal of CPM is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository.</p>
 <h2 class="subtitle is-3" id="a-tutorial">A Tutorial</h2>
 <p>CPM is written in Python 3.7. It can be installed using <code>pip</code>:</p>
 <pre><code>pip install cpm-cli</code></pre>
@@ -109,9 +109,9 @@ Hello World!</code></pre>
 <p>Let’s take a look at the project contents. Right now, they are:</p>
 <pre><code>project.yaml
 main.cpp</code></pre>
-<p>The <code>project.yaml&lt;/code&gt; is the project descriptor and it contains the project configuration as defined by the user. The &lt;code&gt;main.cpp</code> file is the program entry point and at the time of writing this tutorial it is required to be at the project root (the reasons for this are beyond the scope of this tutorial).</p>
+<p>The <code>project.yaml</code> file is the project descriptor and it contains the project configuration as defined by the user. The <code>main.cpp</code> file is the program entry point and at the time of writing this tutorial it is required to be at the project root (the reasons for this are beyond the scope of this tutorial).</p>
 <h3 class="subtitle is-4" id="packages">Packages</h3>
-<p>Projects in CPM are structured around <strong>packages</strong>. A package is a collection of (hopefully) related code that can be addressed from the package root. They are analogous to Python or Java packages. Let’s see how they work with an example of a package named <code>authentication</code>.</p>
+<p>Projects in CPM are structured around <strong>packages</strong>. A package is a collection of (hopefully) related code that can be addressed from the package root. They try to be analogous to Python or Java packages. Let’s see how they work with an example of a package named <code>authentication</code>.</p>
 <p>First, we have to create the package root directory:</p>
 <pre><code>mkdir authentication</code></pre>
 <p>Second, we have to declare the package in the project descriptor:</p>
@@ -123,7 +123,7 @@ packages:
 authentication/Authenticator.h</code></pre>
 <p>By design, both source and header files are placed in the same directory. Now, imagine that we want to make use of the <code>Authenticator</code> class. In order to do so, we need to include the class header from elsewhere:</p>
 <pre><code>#include &lt;authentication/Authenticator.h&gt;</code></pre>
-<p>CPM will automatically solve the include directories required to make this work. Packages can be declared at any level. For example, if the package is not contained directly under the root directory:</p>
+<p>CPM will automatically solve the include directories required to make this work. Packages can be declared at any level. For example, if the package root directory is not contained directly under the root directory:</p>
 <pre><code>domain/authentication/Authenticator.cpp
 domain/authentication/Authenticator.h</code></pre>
 <p>The project descriptor would be:</p>
@@ -133,18 +133,36 @@ packages:
 <p>And the usage would still be the same:</p>
 <pre><code>#include &lt;authentication/Authenticator.h&gt;</code></pre>
 <p>Nesting packages (packages inside other packages) is currently not supported.</p>
-<h3 class="subtitle is-4" id="plugins">Plugins</h3>
-<p>Plugins are the way to share code with CPM. The term <em>plugin</em> (as opposed to <em>library</em> or <em>package</em>) has been used on purpose in order to avoid confusion. Plugins are currently shared as source code and installed in the directory <code>plugins</code>.</p>
-<p>Let’s say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin. As we’ll see later, CPM has been developed with testing in mind.</p>
+<h3 class="subtitle is-4" id="bits">Bits</h3>
+<p>Bits are the way to share code with CPM. Bits are shared as source code and installed in the directory <code>bits</code>. Bits should not be included as part of the project repository.</p>
+<p>There are two ways in which you can install a bit. First, you can simply install them from command line. Let’s say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin.</p>
 <pre><code>cpm install cest</code></pre>
 <p>After having run this command, the project structure is updated:</p>
 <pre><code>main.cpp
 project.yaml
 authentication/Authenticator.cpp
 authentication/Authenticator.h
-plugins/cest/plugin.yaml
-plugins/cest/cest/cest.h</code></pre>
+bits/cest/plugin.yaml
+bits/cest/cest/cest.h</code></pre>
+<p>This is a fast way of installing a dependency. However, the dependency is not recorded anywhere so if someone else downloads your project, the bit dependencies will not be known. In order to keep track of the project dependencies, the bits can be declared in the project descriptor:</p>
+<pre><code>name: awesome-project
+packages:
+    domain/authentication:
+bits:
+    cest: '1.0'</code></pre>
+<p>The bits declared in the project descriptor can be installed all at once using the following command from the project root:</p>
+<pre><code>cpm install</code></pre>
+<p>This command will detect which bits are not installed and will automatically download and install them.</p>
+<h3 class="subtitle is-4" id="test-bits">Test Bits</h3>
+<p>Projects can depend on bits only for testing purposes. In this case, those bits can be declared as <code>test_bits</code>:</p>
+<pre><code>name: awesome-project
+packages:
+    domain/authentication:
+test_bits:
+    cest: '1.0'</code></pre>
+<p>This is particularly useful when developing bits. When installing a bit, the dependencies will be installed transitively. For example, if the project depends on bit A and bit A depends on bit B, then CPM will install transitively bit B when installing bit A. Imagine that now, bit A depends on <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> for testing. We don’t want that dependency to permeate through to our project so bit A should declare <code>Cest</code> as a <code>test_bit</code>.</p>
 <h3 class="subtitle is-4" id="testing">Testing</h3>
+<p>CPM is Test Driven Development ready.</p>
 
         </div>
         <div class="column is-one-fifth has-background-white-bis">
