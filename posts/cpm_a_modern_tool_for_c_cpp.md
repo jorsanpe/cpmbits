@@ -2,7 +2,7 @@
 
 Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
 
-The main goal of CPM is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the plugins repository.
+The main goal of CPM is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository.
 
 ## A Tutorial
 
@@ -99,11 +99,11 @@ And the usage would still be the same:
 
 Nesting packages (packages inside other packages) is currently not supported.
 
-### Plugins
+### Bits
 
-Plugins are the way to share code with CPM. The term <em>plugin</em> (as opposed to <em>library</em> or <em>package</em>) has been used on purpose in order to avoid confusion. Plugins are currently shared as source code and installed in the directory `plugins`. 
+Bits are the way to share code with CPM. Bits are shared as source code and installed in the directory `bits`. 
 
-Let's say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin. As we'll see later, CPM has been developed with testing in mind.
+Let's say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin.
 
 ```
 cpm install cest
@@ -116,9 +116,10 @@ main.cpp
 project.yaml
 authentication/Authenticator.cpp
 authentication/Authenticator.h
-plugins/cest/plugin.yaml
-plugins/cest/cest/cest.h
+bits/cest/plugin.yaml
+bits/cest/cest/cest.h
 ```
 
 ### Testing
 
+CPM is Test Driven Development ready. 

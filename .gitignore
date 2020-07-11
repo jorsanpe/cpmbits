@@ -52,3 +52,4 @@ output/
 docs_output/
 venv/
 node_modules
+blog_output

@@ -10,9 +10,13 @@
   <section class="section">
     <div class="container">
       <div class="columns">
+        {% for post in posts %}
         <div class="column content">
-          {{ post.contents }}
+          <h2><a href="{{ post.href }}">{{ post.title }}</a></h2>
+            {{ post.summary }}
         </div>
+        <div class="divider" data-content=""></div>
+        {% endfor %}
         <div class="column is-one-fifth has-background-white-bis">
           {{ aside_menu }}
         </div>
