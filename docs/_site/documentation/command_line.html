@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CPM Bits</title>
+    <link rel="stylesheet" href="/assets/css/cpmbits.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/assets/css/prism.css" rel="stylesheet">
+    <link href="/assets/css/bulma-divider.min.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="/assets/js/prism.js"></script>
+    <title>getting-started</title>
+  </head>
+  <body>
+    <nav class="navbar has-shadow is-light" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://cpmbits.com">
+                <img src="/assets/images/cpmbits-logo.png" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbar-links" class="navbar-menu">
+            <div class="navbar-start">
+                
+                
+                <a href="/documentation/getting_started.html" class="navbar-item ">
+                    Documentation
+                </a>
+                
+                <a href="/blog_cover.html" class="navbar-item ">
+                    Blog
+                </a>
+                
+                <div class="navbar-item">
+                    <a class="button is-light" href="https://github.com/jorsanpe/cpm" target="_blank">
+                        <img src="/assets/images/GitHub-Mark-32px.png" height="28">
+                    </a>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field has-addons">
+                        <div class="control has-icons-left">
+                            <input class="input" id="search_query" type="text" placeholder="Search bits">
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                        <div class="control">
+                            <a class="button is-primary" id="search_query_submit">
+                                Search
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button" title="User registration only with inviation" href="/registration_page.html">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+      <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth has-background-white-bis">
+          <aside class="menu">
+    <p class="menu-label">
+        Documentation
+    </p>
+    <ul class="menu-list">
+        
+        <li><a href="/documentation/getting_started.html" class="">
+            Getting Started
+        </a></li>
+        
+        <li><a href="/documentation/project_descriptor.html" class="">
+            Project Descriptor
+        </a></li>
+        
+        <li><a href="/documentation/project_structure.html" class="">
+            Project Structure
+        </a></li>
+        
+        <li><a href="/documentation/command_line.html" class="is-active">
+            Command Line
+        </a></li>
+        
+        <li><a href="/documentation/bit_development.html" class="">
+            Bit Development
+        </a></li>
+        
+    </ul>
+</aside>
+
+        </div>
+        <div class="column content">
+          <p>The command line is structured around commands, similar to what you can find in other tools (e.g. Git):</p>
+
+<pre><code class="language-bash">cpm &lt;action&gt; [options]
+</code></pre>
+
+<h2 id="built-in-actions">Built-in Actions</h2>
+
+<h3 id="create"><code class="language-plaintext highlighter-rouge">create</code></h3>
+<p>Create a new CPM project. This command is intended for creating new CPM projects from scratch.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm create &lt;project_name&gt;
+</code></pre>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="init"><code class="language-plaintext highlighter-rouge">init</code></h3>
+<p>Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm init &lt;project_name&gt;
+</code></pre>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="build"><code class="language-plaintext highlighter-rouge">build</code></h3>
+<p>Build CPM project. The build command creates a CMake recipe in the project root directory. It then calls <code class="language-plaintext highlighter-rouge">cmake</code> and <code class="language-plaintext highlighter-rouge">ninja</code> to build the project using the <code class="language-plaintext highlighter-rouge">build</code> directory for the output files. The output binary will have the same name as the <code class="language-plaintext highlighter-rouge">project_name</code> field in the project descriptor and it will be placed in the project root directory.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm build [&lt;target&gt;]
+</code></pre>
+
+<p><strong>OPTIONS</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;target&gt;</code> The target option allows you to compile the application for a specific target. When this option is not specified, <code class="language-plaintext highlighter-rouge">cpm</code> will use the installed compiler. If this option is specified, then <code class="language-plaintext highlighter-rouge">cpm</code> will download the corresponding image from the <a href="https://hub.docker.com/orgs/cpmbits/repositories">cpmbits docker repositories</a> as long as the target is available. The docker images are prepared to compile applications for the particular targets pointed by their names.</p>
+
+<p><strong>EXAMPLE</strong></p>
+
+<pre><code class="language-bash">cpm build ubuntu:20.04
+cpm build raspberrypi4:64
+</code></pre>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="test"><code class="language-plaintext highlighter-rouge">test</code></h3>
+<p>Compile and run project tests. Tests are found recursively starting from the <code class="language-plaintext highlighter-rouge">tests</code> directory, located in the project root. The tests compilation recipe are placed in the directory <code class="language-plaintext highlighter-rouge">recipes/tests</code> which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm test [&lt;pattern&gt;...]
+</code></pre>
+
+<p><strong>OPTIONS</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;pattern&gt;...</code> The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.</p>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="clean"><code class="language-plaintext highlighter-rouge">clean</code></h3>
+<p>Clean CPM project. The clean command basically removes the <code class="language-plaintext highlighter-rouge">recipes</code> directory, effectively removing any CMake recipes built and all compilation caches.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm clean
+</code></pre>
+
+<h3 id="publish"><code class="language-plaintext highlighter-rouge">publish</code></h3>
+<p>Publish a CPM project as a bit in CPM Hub. The publish command packs the project descriptor and its packages into a <code class="language-plaintext highlighter-rouge">zip</code> file and then uploads it to the CPM Hub bit repository. The project descriptor file name is changed in the process from <code class="language-plaintext highlighter-rouge">project.yaml</code> to <code class="language-plaintext highlighter-rouge">bit.yaml</code>.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm publish -s &lt;repository_url&gt;
+</code></pre>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="install"><code class="language-plaintext highlighter-rouge">install</code></h3>
+<p>If no argument is specified, <code class="language-plaintext highlighter-rouge">cpm</code> will install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the <code class="language-plaintext highlighter-rouge">bits</code> directory. When an argument is specified, <code class="language-plaintext highlighter-rouge">cpm</code> will install the latest version of the specified bit.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm install [&lt;bit_name&gt;]
+</code></pre>
+
+<div class="divider" data-content=""></div>
+
+<h3 id="update"><code class="language-plaintext highlighter-rouge">update</code></h3>
+<p>This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.</p>
+
+<p><strong>SYNOPSIS</strong></p>
+<pre><code class="language-bash">cpm update
+</code></pre>
+
+<h2 id="project-actions">Project Actions</h2>
+
+<p>The user can define project specific actions in the project descriptor. This is done through the <code class="language-plaintext highlighter-rouge">actions</code> section described in the <a href="https://github.com/jorsanpe/cpm/wiki/Project-Descriptor">project descriptor</a>. Actions defined there will appear in the command line.</p>
+
+        </div>
+    </div>
+  </section>
+</body>
+</html>
+
+    <footer class="footer">
+    <div class="columns is-mobile">
+        <div class="column is-offset-2">
+            <div class="content has-text-centered">
+                <p><strong>cpm</strong> by Jordi Sánchez.</p>
+            </div>
+        </div>
+        <div class="column">
+            <a href="https://bulma.io">
+                <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+        </div>
+    </div>
+</footer>
+  </body>
+</html>

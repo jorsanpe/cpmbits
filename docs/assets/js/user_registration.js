@@ -68,9 +68,9 @@ registerButton.addEventListener('click', () => {
         console.log(response.status)
         console.log(response.ok)
         if (response.status == 200) {
-            window.location = "registration_success.html";
+            window.location = "/registration_success.html";
         } else {
-            window.location = "registration_failure.html";
+            window.location = "/registration_failure.html";
         }
     })
     .then(data => {});

@@ -1,0 +1,10 @@
+- name: Getting Started
+  link: /documentation/getting_started.html
+- name: Project Descriptor
+  link: /documentation/project_descriptor.html
+- name: Project Structure
+  link: /documentation/project_structure.html
+- name: Command Line
+  link: /documentation/command_line.html
+- name: Bit Development
+  link: /documentation/bit_development.html
