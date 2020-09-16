@@ -1,0 +1,12 @@
+<aside class="menu">
+    <p class="menu-label">
+        Documentation
+    </p>
+    <ul class="menu-list">
+        {% for item in site.data.documentation %}
+        <li><a href="{{ item.link }}" class="{% if page.url == item.link %}is-active{% endif %}">
+            {{ item.name }}
+        </a></li>
+        {% endfor %}
+    </ul>
+</aside>

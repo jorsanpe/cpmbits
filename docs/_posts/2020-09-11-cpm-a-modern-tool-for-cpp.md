@@ -1,5 +1,8 @@
-# CPM: A Modern Tool for C/C++
-
+---
+layout: post
+title: "CPM: A Modern Tool for C/C++"
+author: Jordi Sánchez
+---
 Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
 
 The main goal of CPM is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository.
