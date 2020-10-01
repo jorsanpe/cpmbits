@@ -117,6 +117,10 @@
 <h2 id="elements-of-the-project-descriptor">Elements of the project descriptor</h2>
 
 <table>
+  <colgroup>
+    <col width="35%" />
+    <col width="65%" />
+  </colgroup>
   <thead>
     <tr>
       <th>Parameter</th>
@@ -124,66 +128,25 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">name: string</code></td>
-      <td>The project name field is a string identifying the project. The application will be compiled into a binary file with this name. The <code class="language-plaintext highlighter-rouge">name</code> should not contain any spaces.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">description: string</code></td>
-      <td>This field has currently no practical purpose other than allowing the user to include a larger description of the project.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">version: string</code></td>
-      <td>This field is required when the current project is intended to be published in CPM Hub. The version will be used to publish the plugin accordingly. When not present, the <code class="language-plaintext highlighter-rouge">version</code> field defaults to <code class="language-plaintext highlighter-rouge">"0.1"</code>.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">packages: [object]</code></td>
-      <td>This section contains the list of packages of the project. A <code class="language-plaintext highlighter-rouge">package</code> in CPM is the root directory of a set of source files. For example, when declaring an <code class="language-plaintext highlighter-rouge">api</code> package, CPM will recursively search <code class="language-plaintext highlighter-rouge">*.c</code> and <code class="language-plaintext highlighter-rouge">*.cpp</code> source files in the directory with that name.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">packages.{name}: object</code></td>
-      <td>Each package has to be declared in the <code class="language-plaintext highlighter-rouge">packages</code> section with the same name as its root folder.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">packages.{name}.cflags: [string]</code></td>
-      <td>Packages can be assigned specific compilation flags with the <code class="language-plaintext highlighter-rouge">cflags</code> property. This allows, among other things, mixing C99 and C++11 code in the same executable.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">bits: object</code></td>
-      <td>This section is used to declare which <code class="language-plaintext highlighter-rouge">bits</code> the project depends on. The entries in the <code class="language-plaintext highlighter-rouge">bits</code> section will be used to access CPM Hub and download the declared version of each bit when updating the project.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">bits.{name}: string</code></td>
-      <td>Each declared bit is an entry in the <code class="language-plaintext highlighter-rouge">bits</code> object with the name of the bit as the key and the bit version as the value.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">test_bits: object</code><br /><code class="language-plaintext highlighter-rouge">test_bits.{name}: string</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">test_bits</code> section is treated exactly the same as the <code class="language-plaintext highlighter-rouge">bits</code> section. The main difference is that, when installing a bit that has transitive dependencies, the <code class="language-plaintext highlighter-rouge">test_bits</code> won’t be followed.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">compile_flags: [string]</code></td>
-      <td>This property allows the user to configure the global compilation options. This flags will only apply to the project sources.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">link_options: object</code></td>
-      <td>This property allows the user to define the link options of the binary.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">link_options.libraries: [string]</code></td>
-      <td>The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake <code class="language-plaintext highlighter-rouge">target_link_libraries</code> option with the list expanded.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">actions: object</code></td>
-      <td>The user can define project specific actions in this section.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">actions.{name}: string</code></td>
-      <td>Each key in the actions section is the action alias. The value is a string with the command to be executed for that action.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">targets: object</code><br /><code class="language-plaintext highlighter-rouge">targets.{name}: object</code><br /><code class="language-plaintext highlighter-rouge">targets.{name}.image: string</code></td>
-      <td>The <code class="language-plaintext highlighter-rouge">targets</code> section is currently used to define a custom Docker image from which to build the application.</td>
-    </tr>
+
+<tr><td> <code class="language-plaintext highlighter-rouge">name: string</code></td><td> The project name field is a string identifying the project. The application will be compiled into a binary file with this name. The <code class="language-plaintext highlighter-rouge">name</code> should not contain any spaces.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">description: string</code></td><td> This field has currently no practical purpose other than allowing the user to include a larger description of the project.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">version: string</code></td><td> This field is required when the current project is intended to be published in CPM Hub. The version will be used to publish the plugin accordingly. When not present, the <code class="language-plaintext highlighter-rouge">version</code> field defaults to <code class="language-plaintext highlighter-rouge">"0.1"</code>.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">packages: [object]</code></td><td> This section contains the list of packages of the project. A <code class="language-plaintext highlighter-rouge">package</code> in CPM is the root directory of a set of source files. For example, when declaring an <code class="language-plaintext highlighter-rouge">api</code> package, CPM will recursively search <code class="language-plaintext highlighter-rouge">*.c</code> and <code class="language-plaintext highlighter-rouge">*.cpp</code> source files in the directory with that name.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">packages.{name}: object</code></td><td> Each package has to be declared in the <code class="language-plaintext highlighter-rouge">packages</code> section with the same name as its root folder.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">packages.{name}.cflags: [string]</code></td><td> Packages can be assigned specific compilation flags with the <code class="language-plaintext highlighter-rouge">cflags</code> property. This allows, among other things, mixing C99 and C++11 code in the same executable.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">bits: object</code><br /><code class="language-plaintext highlighter-rouge">bits.{name}: string</code></td><td> This section is used to declare which <code class="language-plaintext highlighter-rouge">bits</code> the project depends on. The entries in the <code class="language-plaintext highlighter-rouge">bits</code> section will be used to access CPM Hub and download the declared version of each bit when updating the project. Each declared bit is an entry in the <code class="language-plaintext highlighter-rouge">bits</code> object with the name of the bit as the key and the bit version as the value.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">compile_flags: [string]</code></td><td> This property allows the user to configure the global compilation options. This flags will only apply to the project sources.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">link_options.libraries: [string]</code></td><td> The libraries section contains a list of strings, each one describing a library that must be used during the final link process. This list translates into a CMake <code class="language-plaintext highlighter-rouge">target_link_libraries</code> option with the list expanded.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test: object</code></td><td> The <code class="language-plaintext highlighter-rouge">test</code> section contains test-only compilation rules.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.packages.{name}: object</code></td><td> Packages that will be included only as part of the test compilation. This is useful when implementing utility functions or mocks for testing.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.packages.{name}.cflags: [string]</code></td><td> Test-only packages can be assigned specific compilation flags with the <code class="language-plaintext highlighter-rouge">cflags</code> property.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.cflags: [string]</code></td><td> Compilation flags that will affect only the test packages and the main test files themselves.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.bits: object</code><br /><code class="language-plaintext highlighter-rouge">test_bits.{name}: string</code></td><td> This is useful to avoid including test-only <code class="language-plaintext highlighter-rouge">bits</code> as part of the final application binary. In the case of test-only <code class="language-plaintext highlighter-rouge">bits</code>, this will not be followed when installing transitive dependencies (bits depending on other bits).</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.link_options.libraries: [string]</code></td><td> Compilation flags that will affect only the test packages and the main test files themselves.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">actions: object</code></td><td> The user can define project specific actions in this section.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">actions.{name}: string</code></td><td> Each key in the actions section is the action alias. The value is a string with the command to be executed for that action.</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">targets: object</code><br /><code class="language-plaintext highlighter-rouge">targets.{name}: object</code><br /><code class="language-plaintext highlighter-rouge">targets.{name}.image: string</code></td><td> The <code class="language-plaintext highlighter-rouge">targets</code> section is currently used to define a custom Docker image from which to build the application.</td></tr>
   </tbody>
 </table>
 
@@ -202,11 +165,16 @@ compile_flags: ['-g']
 bits:
     mongoose: '6.16'
     json: '3.7.3'
-test_bits:
-    cest: '1.0'
-    fakeit: '2.0.5'
 link_options:
     libraries: ['pthread']
+test:
+    packages:
+        tests/mocks:
+    cflags: ['-O0']
+    bits:
+        fakeit: '2.0.5'
+    link_options:
+        libraries: ['cpputest']
 actions:
     deploy: 'echo Deploy!'
 targets:
