@@ -146,7 +146,7 @@ This command will detect which bits are not installed and will automatically dow
 
 ### Testing
 
-CPM is Test Driven Development ready. Currently, the official unit testing framework is <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a>. Tests are declared in the `tests` directory.
+CPM is Test Driven Development ready. Currently, the official unit testing framework is <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a>. Tests are declared in the `tests` directory and found recursively by CPM. Any file starting with 
 
 ### Test Bits
 

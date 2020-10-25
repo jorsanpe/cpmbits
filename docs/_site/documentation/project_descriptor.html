@@ -57,9 +57,10 @@
                             </span>
                         </div>
                         <div class="control">
-                            <a class="button is-primary" id="search_query_submit">
+                            <button class="button is-primary" id="search_button">
                                 Search
-                            </a>
+                            </button>
+                            <script src="/assets/js/search.js"></script>
                         </div>
                     </div>
                 </div>
@@ -142,7 +143,7 @@
 <tr><td> <code class="language-plaintext highlighter-rouge">test.packages.{name}: object</code></td><td> Packages that will be included only as part of the test compilation. This is useful when implementing utility functions or mocks for testing.</td></tr>
 <tr><td> <code class="language-plaintext highlighter-rouge">test.packages.{name}.cflags: [string]</code></td><td> Test-only packages can be assigned specific compilation flags with the <code class="language-plaintext highlighter-rouge">cflags</code> property.</td></tr>
 <tr><td> <code class="language-plaintext highlighter-rouge">test.cflags: [string]</code></td><td> Compilation flags that will affect only the test packages and the main test files themselves.</td></tr>
-<tr><td> <code class="language-plaintext highlighter-rouge">test.bits: object</code><br /><code class="language-plaintext highlighter-rouge">test_bits.{name}: string</code></td><td> This is useful to avoid including test-only <code class="language-plaintext highlighter-rouge">bits</code> as part of the final application binary. In the case of test-only <code class="language-plaintext highlighter-rouge">bits</code>, this will not be followed when installing transitive dependencies (bits depending on other bits).</td></tr>
+<tr><td> <code class="language-plaintext highlighter-rouge">test.bits: object</code><br /><code class="language-plaintext highlighter-rouge">test.bits.{name}: string</code></td><td> This is useful to avoid including test-only <code class="language-plaintext highlighter-rouge">bits</code> as part of the final application binary. In the case of test-only <code class="language-plaintext highlighter-rouge">bits</code>, the won’t be followed when installing transitive dependencies (bits depending on other bits).</td></tr>
 <tr><td> <code class="language-plaintext highlighter-rouge">test.link_options.libraries: [string]</code></td><td> Compilation flags that will affect only the test packages and the main test files themselves.</td></tr>
 <tr><td> <code class="language-plaintext highlighter-rouge">actions: object</code></td><td> The user can define project specific actions in this section.</td></tr>
 <tr><td> <code class="language-plaintext highlighter-rouge">actions.{name}: string</code></td><td> Each key in the actions section is the action alias. The value is a string with the command to be executed for that action.</td></tr>

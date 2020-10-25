@@ -57,9 +57,10 @@
                             </span>
                         </div>
                         <div class="control">
-                            <a class="button is-primary" id="search_query_submit">
+                            <button class="button is-primary" id="search_button">
                                 Search
-                            </a>
+                            </button>
+                            <script src="/assets/js/search.js"></script>
                         </div>
                     </div>
                 </div>
@@ -210,7 +211,7 @@ bits:
 
 <h3 id="testing">Testing</h3>
 
-<p>CPM is Test Driven Development ready. Currently, the official unit testing framework is <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a>. Tests are declared in the <code class="language-plaintext highlighter-rouge">tests</code> directory.</p>
+<p>CPM is Test Driven Development ready. Currently, the official unit testing framework is <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a>. Tests are declared in the <code class="language-plaintext highlighter-rouge">tests</code> directory and found recursively by CPM. Any file starting with</p>
 
 <h3 id="test-bits">Test Bits</h3>
 
