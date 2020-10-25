@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (windowLoc == "/search.html") {
         const urlParams = new URLSearchParams(window.location.search);
         const bit_name = urlParams.get('q');
-        fetch(`http://repo.cpmbits.com:8000/bits?name=${bit_name}`, {
+        fetch(`https://repo.cpmbits.com:8000/bits?name=${bit_name}`, {
             method: 'GET',
             mode: 'cors',
             headers: {
