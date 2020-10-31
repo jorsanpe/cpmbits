@@ -1,3 +1,22 @@
+function searchResultCard(bit) {
+    return `<div class="card">
+    <div class="card-content">
+      <p class="subtitle">
+        <b>${bit.name}</b>
+      </p>
+    </div>
+    <footer class="card-footer">
+        <p class="card-footer-item">
+        </p>
+    </footer>
+  </div>`
+}
+
+function emptySearchResults() {
+    return "no bits found";
+}
+
+
 document.addEventListener("DOMContentLoaded", function() { 
     const searchButton = document.querySelector('#search_button');
     const searchQuery = document.querySelector('#search_query');
@@ -11,20 +30,20 @@ document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         const bit_name = urlParams.get('q');
         fetch(`https://repo.cpmbits.com:8000/bits?name=${bit_name}`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            method: 'GET'
         })
-        .then(response => {
-            console.log(response.status)
-            console.log(response.ok)
-            if (response.status == 200) {
-                const searchResults = document.querySelector('#search_results');
-                searchResults.value = response.body
+        .then(response => response.json())
+        .then(data => {
+            const searchResults = document.querySelector('#search_results');
+            if (data.length == 0) {
+                contents = emptySearchResults();
+            } else {
+                var contents = '';
+                for (var bit of data) {
+                    contents = contents.concat(searchResultCard(bit));
+                }
             }
-        })
-        .then(data => {});
+            searchResults.innerHTML = contents;
+        });
     }
 });
