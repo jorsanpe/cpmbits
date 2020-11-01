@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: getting-started
+title: command-line
 ---
 The command line is structured around commands, similar to what you can find in other tools (e.g. Git):
 
@@ -70,7 +70,7 @@ Clean CPM project. The clean command basically removes the `recipes` directory, 
 Publish a CPM project as a bit in CPM Hub. The publish command packs the project descriptor and its packages into a `zip` file and then uploads it to the CPM Hub bit repository. The project descriptor file name is changed in the process from `project.yaml` to `bit.yaml`.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm publish -s &lt;repository_url&gt;
+<pre><code class="language-bash">cpm publish -s &lt;repository-url&gt;
 </code></pre>
 
 <div class="divider" data-content=""></div>
@@ -93,4 +93,4 @@ This command is useful for integration with some IDEs. It generates the would-be
 
 ## Project Actions
 
-The user can define project specific actions in the project descriptor. This is done through the `actions` section described in the [project descriptor](https://github.com/jorsanpe/cpm/wiki/Project-Descriptor). Actions defined there will appear in the command line.
+The user can define project specific actions in the project descriptor. This is done through the `actions` section described in the [project descriptor](/documentation/project-descriptor.html). Actions defined there will appear in the command line.

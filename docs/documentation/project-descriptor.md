@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: getting-started
+title: project-descriptor
 ---
 The project descriptor is a YAML file with the name `project.yaml` that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a CPM project.
 

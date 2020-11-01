@@ -1,10 +1,10 @@
 - name: Getting Started
-  link: /documentation/getting_started.html
+  link: /documentation/getting-started.html
 - name: Project Descriptor
-  link: /documentation/project_descriptor.html
+  link: /documentation/project-descriptor.html
 - name: Project Structure
-  link: /documentation/project_structure.html
+  link: /documentation/project-structure.html
 - name: Command Line
-  link: /documentation/command_line.html
+  link: /documentation/command-line.html
 - name: Bit Development
-  link: /documentation/bit_development.html
+  link: /documentation/bit-development.html

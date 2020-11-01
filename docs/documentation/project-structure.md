@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: getting-started
+title: project-structure
 ---
 This section describes how CPM projects are managed. When in doubt, please refer to [CPM Hub](https://github.com/jorsanpe/cpm-hub) for reference, as CPM Hub is based on CPM.
 
@@ -24,7 +24,7 @@ Project/
 
 ### `project.yaml`
 
-The project description is stored in this file following the [CPM project schema](cpm-project-schema). This file contains the description of the project, the packages that compose the source code, the `bits` it depends on and the rules for specific targets.
+The project description is stored in this file following the [CPM project descriptor structure](/documentation/project-descriptor.html). This file contains the description of the project, the packages that compose the source code, the `bits` it depends on and the rules for specific targets.
 
 ### `main.cpp`
 
