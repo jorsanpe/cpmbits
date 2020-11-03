@@ -25,7 +25,12 @@ After creating the project, the binary will be available in the project root dir
 
 CPM manages your project dependencies through CPM-Hub. In order to install a package, simply run:
 
-<pre><code class="language-bash">cpm install cest
+<pre><code class="language-bash">cpm install &lt;bit_name&gt;
+</code></pre>
+
+For example:
+
+<pre><code class="language-bash">cpm install sqlite3
 </code></pre>
 
 ## Run your tests
