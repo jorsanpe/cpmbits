@@ -4,39 +4,47 @@ title: getting-started
 ---
 ## Installation
 
-<pre><code class="language-bash">pip3 install cpm-cli
-</code></pre>
+```bash
+pip3 install cpm-cli
+```
 
 CPM depends on [CMake](https://cmake.org/) and [ninja](https://ninja-build.org/) for the build process.
 
 ## Create a Project
-
-<pre><code class="language-bash">cpm create DeathStartLaserBackend
+```bash
+cpm create DeathStartLaserBackend
 cd DeathStartLaserBackend
-cpm build
-</code></pre>
+cpm
+build
+```
 
 After creating the project, the binary will be available in the project root directory. 
 
-<pre><code class="language-bash">./DeathStartLaserBackend
-</code></pre>
+```bash
+./DeathStartLaserBackend
+```
 
 ## Manage dependencies
 
-CPM manages your project dependencies through CPM-Hub. In order to install a package, simply run:
+CPM manages your project dependencies through CPM-Hub. In order to install a bit, first declare the dependency in the project descriptor like this:
 
-<pre><code class="language-bash">cpm install &lt;bit_name&gt;
-</code></pre>
+```yaml
+build:
+  bits:
+    sqlite3: '3.32.3'
+```
 
-For example:
+Then install the project bits with
 
-<pre><code class="language-bash">cpm install sqlite3
-</code></pre>
+```bash
+cpm install
+```
 
 ## Run your tests
 
-<pre><code class="language-bash">cpm test
-</code></pre>
+```bash
+cpm test
+```
 
 Test sources reside in the `tests` directory. They are found recursively from the root directory
  using the expression `test_*.cpp`.

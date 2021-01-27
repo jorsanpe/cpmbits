@@ -17,7 +17,7 @@ Project/
         test_suite.cpp
     bits/
         cest/
-            bit.yaml
+            project.yaml
             cest/
                 cest.h
 ```

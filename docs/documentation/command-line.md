@@ -4,8 +4,9 @@ title: command-line
 ---
 The command line is structured around commands, similar to what you can find in other tools (e.g. Git):
 
-<pre><code class="language-bash">cpm &lt;action&gt; [options]
-</code></pre>
+```bash
+cpm <action> [options]
+```
 
 ## Built-in Actions
 
@@ -13,8 +14,9 @@ The command line is structured around commands, similar to what you can find in 
 Create a new CPM project. This command is intended for creating new CPM projects from scratch.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm create &lt;project_name&gt;
-</code></pre>
+```bash
+cpm create <project_name>
+```
 
 <div class="divider" data-content=""></div>
 
@@ -22,8 +24,9 @@ Create a new CPM project. This command is intended for creating new CPM projects
 Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm init &lt;project_name&gt;
-</code></pre>
+```bash
+cpm init <project_name>
+```
 
 <div class="divider" data-content=""></div>
 
@@ -31,8 +34,9 @@ Initialize the current directory as a new CPM project. This command is intended 
 Build CPM project. The build command creates a CMake recipe in the project root directory. It then calls `cmake` and `ninja` to build the project using the `build` directory for the output files. The output binary will have the same name as the `project_name` field in the project descriptor and it will be placed in the project root directory.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm build [&lt;target&gt;]
-</code></pre>
+```bash
+cpm build [<target>]
+```
 
 **OPTIONS**
 
@@ -40,18 +44,20 @@ Build CPM project. The build command creates a CMake recipe in the project root 
 
 **EXAMPLE**
 
-<pre><code class="language-bash">cpm build ubuntu:20.04
+```bash
+cpm build ubuntu:20.04
 cpm build raspberrypi4:64
-</code></pre>
+```
 
 <div class="divider" data-content=""></div>
 
 ### `test`
-Compile and run project tests. Tests are found recursively starting from the `tests` directory, located in the project root. The tests compilation recipe are placed in the directory `recipes/tests` which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.
+Compile and run project tests. If no files or dirs are specified, tests will be found recursively starting from the `tests` directory, located in the project root. The tests compilation recipe are placed in the directory `recipes/tests` which is also used during the compilation process. For each test suite found, an executable file with the same name will be built and run.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm test [&lt;pattern&gt;...]
-</code></pre>
+```bash
+cpm test [files or dirs]
+```
   
 **OPTIONS**
 
@@ -63,24 +69,27 @@ Compile and run project tests. Tests are found recursively starting from the `te
 Clean CPM project. The clean command basically removes the `recipes` directory, effectively removing any CMake recipes built and all compilation caches.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm clean
-</code></pre>
+```bash
+cpm clean
+```
 
 ### `publish`
-Publish a CPM project as a bit in CPM Hub. The publish command packs the project descriptor and its packages into a `zip` file and then uploads it to the CPM Hub bit repository. The project descriptor file name is changed in the process from `project.yaml` to `bit.yaml`.
+Publish a CPM project as a bit in CPM Hub. The publish command packs the project and uploads it to the CPM Hub bit repository.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm publish -s &lt;repository-url&gt;
-</code></pre>
+```bash
+cpm publish -s <repository-url>
+```
 
 <div class="divider" data-content=""></div>
 
 ### `install`
-If no argument is specified, `cpm` will install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the `bits` directory. When an argument is specified, `cpm` will install the latest version of the specified bit.
+Install all the bits declared in the project descriptor, upgrading/downgrading the bits as required. Installed bits will be installed into the `bits` directory.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm install [&lt;bit_name&gt;]
-</code></pre>
+```bash
+cpm install
+```
 
 <div class="divider" data-content=""></div>
 
@@ -88,8 +97,9 @@ If no argument is specified, `cpm` will install all the bits declared in the pro
 This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.
 
 **SYNOPSIS**
-<pre><code class="language-bash">cpm update
-</code></pre>
+```bash
+cpm update
+```
 
 ## Project Actions
 
