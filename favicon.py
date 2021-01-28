@@ -1,6 +1,6 @@
 import drawSvg as draw
 
-d = draw.Drawing(280, 120, origin=(-60, -90), displayInline=False)
+d = draw.Drawing(120, 120, origin=(-60, -90), displayInline=False)
 
 # p = draw.Path(stroke_width=0, stroke='#3E442B', fill='#2E2C2F ', fill_opacity=1)
 # p.M(60, 40)
@@ -50,19 +50,4 @@ p.A(60, 60, 1, 1, 1, 0, 30)
 p.Z()
 d.append(p)
 
-p = draw.Path(stroke_width=0, stroke='#3E442B', fill='#2E2C2F', fill_opacity=1)
-p.M(100, 30)
-p.l(60, 0)
-p.A(60, 60, 0, 1, 1, 160, -90)
-p.l(-40, 0)
-p.l(0, 20)
-p.l(40, 0)
-p.A(40, 40, 1, 1, 0, 160, 10)
-p.l(-70, 0)
-p.l(0, -100)
-p.l(-20, 0)
-p.l(0, 120)
-p.Z()
-d.append(p)
-
-d.saveSvg('docs/assets/images/logo.svg')
+d.savePng('docs/favicon.ico')
