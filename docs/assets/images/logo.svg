@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="280" height="120" viewBox="-60 -30 280 120">
+<defs>
+</defs>
+<path d="M0,-30 l60,0 l0,20 l-60,0 A40,40,1,1,0,0,70 l40,0 l0,20 l-40,0 A60,60,1,1,1,0,-30 Z" stroke-width="0" stroke="#3E442B" fill="#2E2C2F" fill-opacity="1" />
+<path d="M100,-30 l60,0 A60,60,0,1,1,160,90 l-40,0 l0,-20 l40,0 A40,40,1,1,0,160,-10 l-70,0 l0,100 l-20,0 l0,-120 Z" stroke-width="0" stroke="#3E442B" fill="#2E2C2F" fill-opacity="1" />
+</svg>
