@@ -14,8 +14,7 @@ CPM depends on [CMake](https://cmake.org/) and [ninja](https://ninja-build.org/)
 ```bash
 cpm create DeathStartLaserBackend
 cd DeathStartLaserBackend
-cpm
-build
+cpm build
 ```
 
 After creating the project, the binary will be available in the project root directory. 
