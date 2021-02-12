@@ -114,7 +114,7 @@ By design, both source and header files are placed in the same directory. Now, l
 ```cpp
 // Main.cpp
 /*
- * Automatically created with CPM
+ * Automatically created with cpm
  */
 #include <iostream>
 #include <multiplication/Multiply.h>

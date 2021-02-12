@@ -2,9 +2,10 @@
 layout: documentation
 title: project-descriptor
 ---
-Every cpm project is configured through the **project descriptor**, a YAML file with the name `project.yaml` located at the project root directory that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a cpm project.
 
 ## Project descriptor
+
+Every cpm project is configured through the **project descriptor**, a YAML file with the name `project.yaml` located at the project root directory that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a cpm project.
 
 ### Project information
 
@@ -77,6 +78,10 @@ The `ldflags` element is used to define the link options used for a particular c
 
 The `libraries` element is included for convenience (to avoid including the libraries as `ldflags`). It is a list of strings, each containing the name of a library without the leading `lib` suffix. 
 
+#### includes
+
+The `includes` element allows the user to specify user-defined include directories. The list of include directories specified here will be passed to the compiler as the plain old `-I` option. This can be useful in some situations, for example, when some source code files are automatically generated, refactoring the files can be inconvenient.
+
 #### bits
 
 The `bits` element is used to declare the dependencies for a particular compilation plan. Each `bit` entry contains a string declaring the bit version that the project depends on.
@@ -129,13 +134,18 @@ Use this to indicate the name of a Docker image where the project will be built.
 
 #### targets.&lt;target_name&gt;.dockerfile
 
-The purpose is the same as with `targets.&lt;target_name&gt;.image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile inside it. The `image` and `dockerfile` sections are mutually exclusive so if both are specified, `image` will be used.
+The purpose is the same as with `targets.<target_name>.image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile inside it. The `image` and `dockerfile` sections are mutually exclusive so if both are specified, `image` will be used.
 
-```
+#### targets.&lt;target_name&gt;.post_build
+
+Sometimes, the result of the build process will be not be the final deployable artifact. The `post_build` action allows the user to specify a list of shell commands that will be automatically run by cpm *within the compilation context*. Notice that this implies that when using a Docker image for compiling, the post-build action will be executed *inside the container*, and *the working directory will be the project root*.
+
+```yaml
 targets:
   default:
     main: 'main.cpp'
-    image: 
+    image: 'cpmbits/raspberrypi4:64'
+    post_build: 'objcopy -S build/binary'
 ```
 
 ## Sample file
@@ -144,7 +154,7 @@ The following corresponds to the project descriptor used in [cpm-hub](https://gi
 
 ```yaml
 name: 'cpm-hub'
-description: 'CPM Hub open source server for hosting CPM bits'
+description: 'cpm-hub open source server for hosting cpm bits'
 build:
   packages:
     cpm-hub/http:

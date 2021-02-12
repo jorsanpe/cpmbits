@@ -11,7 +11,7 @@ cpm <action> [options]
 ## Built-in Actions
 
 ### `create`
-Create a new CPM project. This command is intended for creating new CPM projects from scratch.
+Create a new cpm project. This command is intended for creating new cpm projects from scratch.
 
 **SYNOPSIS**
 ```bash
@@ -21,7 +21,7 @@ cpm create <project_name>
 <div class="divider" data-content=""></div>
 
 ### `init`
-Initialize the current directory as a new CPM project. This command is intended for creating CPM projects from existing sources.
+Initialize the current directory as a new cpm project. This command is intended for creating cpm projects from existing sources.
 
 **SYNOPSIS**
 ```bash
@@ -31,7 +31,7 @@ cpm init <project_name>
 <div class="divider" data-content=""></div>
 
 ### `build`
-Build CPM project. The build command creates a CMake recipe in the project root directory. It then calls `cmake` and `ninja` to build the project using the `build` directory for the output files. The output binary will have the same name as the `project_name` field in the project descriptor and it will be placed in the project root directory.
+Build cpm project. The build command creates a CMake recipe in the project root directory. It then calls `cmake` and `ninja` to build the project using the `build` directory for the output files. The output binary will have the same name as the `project_name` field in the project descriptor and it will be placed in the project root directory.
 
 **SYNOPSIS**
 ```bash
@@ -66,7 +66,7 @@ cpm test [files or dirs]
 <div class="divider" data-content=""></div>
 
 ### `clean`
-Clean CPM project. The clean command basically removes the `recipes` directory, effectively removing any CMake recipes built and all compilation caches.
+Clean cpm project. The clean command basically removes the `recipes` directory, effectively removing any CMake recipes built and all compilation caches.
 
 **SYNOPSIS**
 ```bash
@@ -74,7 +74,7 @@ cpm clean
 ```
 
 ### `publish`
-Publish a CPM project as a bit in CPM Hub. The publish command packs the project and uploads it to the CPM Hub bit repository.
+Publish a cpm project as a bit in cpm-hub. The publish command packs the project and uploads it to the cpm-hub bit repository.
 
 **SYNOPSIS**
 ```bash
@@ -93,14 +93,11 @@ cpm install
 
 <div class="divider" data-content=""></div>
 
-### `update`
-This command is useful for integration with some IDEs. It generates the would-be CMake recipe so that the IDE can use it as an input for indexing and any other related functionalities.
+### `prep`
+
+This command is useful for integration with some IDEs. It generates the would-be CMakeLists.txt recipe so that the IDE can use it as an input for indexing and other related functionalities.
 
 **SYNOPSIS**
 ```bash
-cpm update
+cpm prep
 ```
-
-## Project Actions
-
-The user can define project specific actions in the project descriptor. This is done through the `actions` section described in the [project descriptor](/documentation/project-descriptor.html). Actions defined there will appear in the command line.

@@ -8,7 +8,7 @@ title: getting-started
 pip3 install cpm-cli
 ```
 
-CPM depends on [CMake](https://cmake.org/) and [ninja](https://ninja-build.org/) for the build process.
+cpm depends on [CMake](https://cmake.org){:target="_blank"} and [ninja](https://ninja-build.org){:target="_blank"} for the build process.
 
 ## Create a Project
 ```bash
@@ -25,7 +25,7 @@ After creating the project, the binary will be available in the project root dir
 
 ## Manage dependencies
 
-CPM manages your project dependencies through CPM-Hub. In order to install a bit, first declare the dependency in the project descriptor like this:
+cpm manages your project dependencies through cpm-hub. In order to install a bit, first declare the dependency in the project descriptor like this:
 
 ```yaml
 build:
