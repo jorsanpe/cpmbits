@@ -45,12 +45,14 @@ Project/
 
 Second, declare the packages in `project.yaml`:
 
-```
-project_name: cpm-hub
-description: CPM Hub open source server for hosting CPM software
-packages:
-  api:
-    cflags: [ -std=c++11 ]
+```yaml
+project_name: 'cpm-hub'
+description: 'CPM Hub open source server for hosting CPM software'
+build:
+  packages:
+    api:
+      cflags: 
+        - -std=c++11
 ```
 
 Each entry in `packages` is the path to the package, followed by a dictionary of properties for that package. This section is under development so, for now, only the `cflags` property is implemented. The `cflags` property allows the developer to specify compilation flags for each package. The properties defined to the package will be applied to all the source files of the package.
