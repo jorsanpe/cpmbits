@@ -3,7 +3,7 @@ layout: documentation
 title: project-descriptor
 ---
 
-## Project descriptor
+# Project descriptor
 
 Every cpm project is configured through the **project descriptor**, a YAML file with the name `project.yaml` located at the project root directory that contains the description of the different elements of the application. A folder containing this file with the proper schema will be identified as a cpm project.
 

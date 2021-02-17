@@ -5038,7 +5038,7 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-i
   flex-shrink: 0;
 }
 .navbar-item img {
-  max-height: 2.2rem;
+  max-height: 2.3rem;
 }
 .navbar-item.has-dropdown {
   padding: 0;

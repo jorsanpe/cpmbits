@@ -6,5 +6,7 @@
   link: /documentation/project-structure.html
 - name: Command Line
   link: /documentation/command-line.html
+- name: Testing
+  link: /documentation/testing.html
 - name: Bit Development
   link: /documentation/bit-development.html

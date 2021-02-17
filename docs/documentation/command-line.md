@@ -2,6 +2,9 @@
 layout: documentation
 title: command-line
 ---
+
+# Command Line Interface
+
 The command line is structured around commands, similar to what you can find in other tools (e.g. Git):
 
 ```bash

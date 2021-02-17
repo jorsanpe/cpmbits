@@ -3,7 +3,7 @@ layout: documentation
 title: project-structure
 ---
 
-## Project descriptor
+# Project Structure
 
 This section describes how cpm projects are managed. When in doubt, please refer to [cpm-hub](https://github.com/jorsanpe/cpm-hub){:target="_blank"} for reference, as cpm-hub is based on cpm.
 
