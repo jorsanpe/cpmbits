@@ -2,18 +2,31 @@ const registerButton = document.querySelector('#registration_form_submit');
 const username = document.querySelector('#registration_form_username');
 const email = document.querySelector('#registration_form_email');
 const password = document.querySelector('#registration_form_password');
+const repeatPassword = document.querySelector('#registration_form_repeat_password');
+
+
+function displayFieldError(field, fieldStatus, errorMessage)
+{
+    fieldStatus.innerHTML = errorMessage;
+    fieldStatus.className = "help is-danger";
+    field.className = "input is-danger";
+}
+
+
+function displayFieldOk(field, fieldStatus)
+{
+    fieldStatus.innerHTML = "";
+    fieldStatus.className = "help";
+    field.className = "input is-success";
+}
 
 
 function validateField(field, fieldStatus, errorMessage)
 {
     if (!field.checkValidity()) {
-        fieldStatus.innerHTML = errorMessage;
-        fieldStatus.className = "help is-danger"
-        field.className = "input is-danger"
+        displayFieldError(field, fieldStatus, errorMessage);
     } else {
-        fieldStatus.innerHTML = "";
-        fieldStatus.className = "help"
-        field.className = "input is-success"
+        displayFieldOk(field, fieldStatus);
     }
 }
 
@@ -36,25 +49,44 @@ username.addEventListener('input', function (event) {
 });
 
 
+function validateRepeatPassword()
+{
+    if (repeatPassword.value != password.value) {
+        displayFieldError(repeatPassword, document.querySelector('#registration_form_username_status'), "passwords are not the same");
+    } else {
+        displayFieldOk(repeatPassword, document.querySelector('#registration_form_username_status'));
+    }
+}
+
+
 password.addEventListener('input', function (event) {
     validateField(
         document.querySelector('#registration_form_password'),
         document.querySelector('#registration_form_password_status'),
         "password is invalid"
     );
+    validateRepeatPassword();
 });
 
 
+repeatPassword.addEventListener('input', function (event) {
+    validateRepeatPassword();
+})
+
+
 registerButton.addEventListener('click', () => {
-    if (!username.checkValidity() || !email.checkValidity() || !password.checkValidity()) {
+    if (!username.checkValidity()
+        || !email.checkValidity()
+        || !password.checkValidity()
+        || password.value != repeatPassword.value)
+    {
         return;
     }
 
     var registrationMessage = {
-        username: document.querySelector('#registration_form_username').value,
-        email: email,
-        password: password,
-        invitation_token: document.querySelector('#registration_form_invitation_token').value,
+        username: username.value,
+        email: email.value,
+        password: password.value,
     }
     fetch('http://repo.cpmbits.com:8000/users', {
         method: 'POST',
