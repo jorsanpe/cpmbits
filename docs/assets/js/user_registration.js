@@ -52,9 +52,16 @@ username.addEventListener('input', function (event) {
 function validateRepeatPassword()
 {
     if (repeatPassword.value != password.value) {
-        displayFieldError(repeatPassword, document.querySelector('#registration_form_username_status'), "passwords are not the same");
+        displayFieldError(
+            repeatPassword, 
+            document.querySelector('#registration_form_repeat_password_status'), 
+            "passwords are not the same"
+        );
     } else {
-        displayFieldOk(repeatPassword, document.querySelector('#registration_form_username_status'));
+        displayFieldOk(
+            repeatPassword, 
+            document.querySelector('#registration_form_repeat_password_status')
+        );
     }
 }
 
