@@ -88,7 +88,7 @@ registerButton.addEventListener('click', () => {
         email: email.value,
         password: password.value,
     }
-    fetch('http://repo.cpmbits.com:8000/users', {
+    fetch('https://repo.cpmbits.com:8000/users', {
         method: 'POST',
         mode: 'cors',
         headers: {
