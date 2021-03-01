@@ -53,3 +53,7 @@ docs_output/
 venv/
 node_modules
 blog_output
+docs/_site
+docs/.jekyll-cache
+.jekyll-cache
+docs/documentation/.jekyll-cache

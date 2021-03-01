@@ -3,9 +3,10 @@ layout: post
 title: "cpm: A Modern Tool for C/C++"
 author: Jordi Sánchez
 ---
+
 Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
 
-The main goal of cpm is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository. Following, we present a step by step tutorial, after which you should end up with a running application.
+The main goal of cpm is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository. Following, we present a step by step tutorial, after which you should end up with a running application. We try to maintain this tutorial to be valid for the latest version of cpm which, by the time of this writing, is version 1.5. You might find more information in your `project.yaml` file than what is presented here but you can safely ignore the extra parts in your project descriptor.
 
 ## Tutorial
 
@@ -37,6 +38,7 @@ Let's take a look at the project contents. Right now, they are:
 $ ls
 project.yaml
 main.cpp
+tests
 ```
 
 The `project.yaml` file is the project descriptor and it contains the project configuration as defined by the user. After creation, it only contains the project name. The `main.cpp` file is the program entry point and at the time of writing this tutorial it is required to be at the project root (the reasons for this are beyond the scope of this tutorial but they are related to the current implementation of the tests compilation).
@@ -71,7 +73,8 @@ Second, edit the `project.yaml` file and declare the package:
 
 ```yaml
 name: awesome-project
-packages:
+build:
+  packages:
     multiplication:
 ```
 
@@ -139,7 +142,8 @@ The project descriptor could be:
 
 ```yaml
 name: awesome-project
-packages:
+build:
+  packages:
     math/multiplication:
 ```
 
@@ -176,9 +180,11 @@ This is the fastest way of installing a bit. However, the bit dependency is not 
 
 ```yaml
 name: awesome-project
-packages:
+build:
+  packages:
     math/multiplication:
-bits:
+test:
+  bits:
     cest: '1.0'
 ```
 
