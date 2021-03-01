@@ -33,13 +33,14 @@
                 <p id="registration_form_password_status" class="help"></p>
             </div>
         </div>
-        <div class="field">
-            <label class="label">Invitation Token</label>
-            <div class="control has-icons-left">
-                <input class="input" id="registration_form_invitation_token" type="text" placeholder="Invitation Token">
+        <div class="field" id="registration_form_repeat_password_field">
+            <label class="label">Repeat password</label>
+            <div class="control has-icons-left has-icons-right" id="registration_form_repeat_password_control">
+                <input class="input" id="registration_form_repeat_password" type="password" placeholder="Password" required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                 <span class="icon is-small is-left">
-                    <i class="fa fa-ticket-alt"></i>
+                    <i class="fas fa-lock"></i>
                 </span>
+                <p id="registration_form_repeat_password_status" class="help"></p>
             </div>
         </div>
         <div class="field">
