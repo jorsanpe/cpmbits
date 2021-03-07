@@ -76,6 +76,8 @@ Clean cpm project. The clean command basically removes the `recipes` directory, 
 cpm clean
 ```
 
+<div class="divider" data-content=""></div>
+
 ### `publish`
 Publish a cpm project as a bit in cpm-hub. The publish command packs the project and uploads it to the cpm-hub bit repository.
 
@@ -102,5 +104,5 @@ This command is useful for integration with some IDEs. It generates the would-be
 
 **SYNOPSIS**
 ```bash
-cpm prep
+cpm prep [<target>]
 ```

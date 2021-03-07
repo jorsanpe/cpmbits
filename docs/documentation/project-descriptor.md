@@ -95,7 +95,7 @@ build:
   packages:
     sqlite3:
       cflags: ['-DSQLITE_MUTEX_NOOP']   # These flags apply only for the sqlite3 package
-  cflags: ['-g']                        # These
+  cflags: ['-g']                        # These flags apply globally
   ldflags: []
   libraries: ['pthread', 'ssl']
   bits:
@@ -132,6 +132,10 @@ Use to configure the location of the file containing the `main` function. This i
 
 Use this to indicate the name of a Docker image where the project will be built. This allows developers to share docker images where the toolchains and all the compilation dependencies are already installed, so complex toolchain and library setups can be avoided.
 
+#### targets.&lt;target_name&gt;.test_image
+
+Use this to indicate the name of a Docker image where the project tests will be built and run. Similarly to the `image` configuration parameter, this allows developers to share docker images where the toolchains and all the testing dependencies are already installed.
+
 #### targets.&lt;target_name&gt;.dockerfile
 
 The purpose is the same as with `targets.<target_name>.image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile inside it. The `image` and `dockerfile` sections are mutually exclusive so if both are specified, `image` will be used.
@@ -140,12 +144,20 @@ The purpose is the same as with `targets.<target_name>.image`, but instead of do
 
 Sometimes, the result of the build process will be not be the final deployable artifact. The `post_build` action allows the user to specify a list of shell commands that will be automatically run by cpm *within the compilation context*. Notice that this implies that when using a Docker image for compiling, the post-build action will be executed *inside the container*, and *the working directory will be the project root*.
 
+#### targets.&lt;target_name&gt;.toolchain_prefix
+
+The `tolchain_prefix` allows the user to specify the toolchain to be used for compiling the target. This gives the user full control over the location of the toolchain. This parameter is optional for cross compiling the project, but can be useful some scenarios. For example, one scenario would be having the toolchain installed in the host, thus not requiring the use of Docker for cross compiling. Another use could be to have multiple toolchains installed in a single Docker image, so that the same image can be used for compiling all required targets, thus reducing maintenance.
+
+Notice that the `toolchain_prefix` will be prepended to the compiler name so the final dash must be specified (see example below).
+
 ```yaml
 targets:
   default:
     main: 'main.cpp'
     image: 'cpmbits/raspberrypi4:64'
+    test_image: 'cpmbits/ubuntu:20.04'
     post_build: 'objcopy -S build/binary'
+    toolchain_prefix: 'arm-linux-gnueabihf-'
 ```
 
 ## Sample file
