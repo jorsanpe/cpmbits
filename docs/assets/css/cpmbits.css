@@ -5064,6 +5064,12 @@ a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-i
   color: #3273dc;
   padding-bottom: calc(0.5rem - 3px);
 }
+.navbar-item-active {
+  border-bottom-color: #2E8B57;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  padding-bottom: calc(0.5rem - 3px);
+}
 
 .navbar-content {
   flex-grow: 1;
@@ -5334,7 +5340,10 @@ body.has-spaced-navbar-fixed-bottom {
 
   a.navbar-item.is-active,
 .navbar-link.is-active {
-    color: #0a0a0a;
+    border-bottom-color: #2E8B57;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    padding-bottom: calc(0.5rem - 3px);
   }
   a.navbar-item.is-active:not(:focus):not(:hover),
 .navbar-link.is-active:not(:focus):not(:hover) {
