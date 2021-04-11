@@ -10,3 +10,5 @@
   link: /documentation/testing.html
 - name: Bit Development
   link: /documentation/bit-development.html
+- name: Cross Compilation
+  link: /documentation/cross-compilation.html

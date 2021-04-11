@@ -19,14 +19,7 @@ Every bit version can be published only once. This is a must in order to allow u
 
 ## Version numbering
 
-For the time being, cpm allows publishing versions using a custom formatting, similar to but not completely compatible with [SemVer](https://semver.org/){:target="_blank"}. We're targetting full compliance with SemVer in the future. For the time being, following are valid version numbers:
-
-```
-2020            # <number>
-2020.4          # <number>.<number>
-4.5.32          # <number>.<number>.<number>
-3.2.23-alpha    # <number>.<number>.<number>-<alphanumeric>
-```
+cpm allows publishing versions that follow [SemVer](https://semver.org/){:target="_blank"}. The dependency management is still work in progress but it will be introduced in the future.
 
 ## Publishing your project as a cpm bit
 
