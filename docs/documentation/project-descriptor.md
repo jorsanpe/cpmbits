@@ -72,7 +72,7 @@ The `cflags` element is used to define the compilation options used in a particu
 
 #### ldflags
 
-The `ldflags` element is used to define the link options used for a particular compilation plan.
+The `ldflags` element is used to define the options passed to the linker for a particular compilation plan.
 
 #### libraries
 
@@ -88,7 +88,7 @@ The `bits` element is used to declare the dependencies for a particular compilat
 
 #### Example
 
-Here's a somewhat complete example of how the compilation plan works:
+Here's a complete example of a compilation plan:
 
 ```yaml
 build:
