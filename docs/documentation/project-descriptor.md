@@ -38,11 +38,11 @@ schema: '1.0'
 
 #### build
 
-The `build` section includes the generic *compilation plan*. It contains the information required by cpm to generate the compilation recipe for building the project. The build section compilation plan is considered to be the generic part of the compilation, common to all targets. The build section will be used also by the tests.
+The `build` section includes the base *compilation plan*. It contains the information required by cpm to generate the compilation recipe for building the project. The build section compilation plan is considered to be the generic part of the compilation, common to all targets. The build section will be used also by the tests.
 
 #### test
 
-The `test` section includes the generic *compilation plan* for testing. The generic testing compilation plan is combined with the generic build compilation plan. It is intended to allow the user to include test-only packages, flags and dependencies.
+The `test` section includes the base *compilation plan* for testing. The base testing compilation plan is combined with the base build compilation plan for each test. It is intended to allow the user to include test-only packages, flags and dependencies.
 
 ### Compilation plan
 
@@ -127,6 +127,10 @@ The targets section contains instructions for compiling the project against a pa
 #### targets.&lt;target_name&gt;.main
 
 Use to configure the location of the file containing the `main` function. This is useful when having different boot sequences for different targets.
+
+#### targets.&lt;target_name&gt;.build
+
+Each target can extend the base compilation plan with some particular compilation instructions. This is useful, for example, when a particular package should be built only when compiling for a particular target.
 
 #### targets.&lt;target_name&gt;.image
 
