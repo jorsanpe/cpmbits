@@ -6,17 +6,17 @@ author: Jordi Sánchez
 
 Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
 
-The main goal of cpm is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository. Following, we present a step by step tutorial, after which you should end up with a running application. We try to maintain this tutorial to be valid for the latest version of cpm which, by the time of this writing, is version 1.5. You might find more information in your `project.yaml` file than what is presented here but you can safely ignore the extra parts in your project descriptor.
+The main goal of cpm is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository. Following, we present a step by step tutorial, after which you should end up with a running application. We try to maintain this tutorial to be valid for the latest version of cpm which, by the time of this writing, is version 1.6. You might find more information in your `project.yaml` file than what is presented here but you can safely ignore the extra parts in your project descriptor for this tutorial.
 
 ## Tutorial
 
-cpm is written in Python 3.7. It can be installed using `pip`:
+cpm has been developed using Python 3.7. It can be installed using `pip`:
 
 ```
 pip install cpm-cli
 ```
 
-The command line tool is not a build system, it's an orchestrator, so two additional tools are required in order to compile the project sources. First, cpm generates compilation recipes for <a href="https://cmake.org" target="_blank" rel="noopener">CMake</a>. Second, it uses the CMake <a href="https://ninja-build.org" target="_blank" rel="noopener">Ninja</a> generator. Needless to say that a C/C++ compiler is also required. cpm does not rely on any particular version of the aforementioned tools, so if you install the latest version of each you should be good to go.
+The cpm command line tool is not a build system, it's an orchestrator, so two additional tools are required in order to compile the project sources. First, cpm generates compilation recipes for <a href="https://cmake.org" target="_blank" rel="noopener">CMake</a>. Second, it uses the CMake <a href="https://ninja-build.org" target="_blank" rel="noopener">Ninja</a> generator. Needless to say that a C/C++ compiler is also required. cpm does not rely on any particular version of the aforementioned tools, so if you install the latest version of each you should be good to go. You can avoid depending on these tools by using the integration of cpm with Docker, but we will talk about that some other time.
 
 ### Creating a new Project
 
@@ -157,26 +157,9 @@ Nesting packages (packages inside other packages) is currently not supported.
 
 ### Bits
 
-Bits are the way to share code with cpm. Bits are pieces of shared as source code that can be downloaded and used in your project. You can think of them as a kind of library. They come in the form of source code, so you can compile them for whatever target you require (as long as the bit is compatible for that target).
+Bits are the way to share code with cpm. Bits are pieces of source code that can be downloaded and used in your project. Being in the form of source code, you can compile them for whatever target you require, as long as the bit is compatible for that target.
 
-There are two ways in which you can install a bit. First, you can simply install them from command line. Let's say we want to install the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> plugin. Cest is a testing framework installed as a header only plugin.
-
-```
-cpm install cest
-```
-
-After having run this command, the project structure is updated (there might be differences as the content of the `cest` plugin might change over time):
-
-```
-main.cpp
-project.yaml
-multiplication/Multiply.cpp
-multiplication/Multiply.h
-bits/cest/plugin.yaml
-bits/cest/cest/cest.h
-```
-
-This is the fastest way of installing a bit. However, the bit dependency is not recorded anywhere so if someone else downloads your project, she will not be aware of the dependency. The proper way of keeping track of the project bit dependencies is to declare them in the project descriptor:
+Let's say we want to make use of the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> framework for our tests. We start by declaring the dependency in the project descriptor:
 
 ```yaml
 name: awesome-project
@@ -188,13 +171,24 @@ test:
     cest: '1.0'
 ```
 
-The bits declared in the project descriptor can be installed all at once using the following command from the project root:
+As you can see, as this is bit is only required for testing, we declare it in the `test` section of the project descriptor. Then, we can proceed to install the declared bits with:
 
 ```bash
 $ cpm install
 ```
 
-This command will detect which bits are not installed and will automatically download and install them. In this case, when you run this command you'll see that, because the bit was already install, cpm simply skips the installation.
+This command will detect which bits are not installed and will automatically download and install them. After having run this command, the project structure is updated as follows:
+
+```
+main.cpp
+project.yaml
+multiplication/Multiply.cpp
+multiplication/Multiply.h
+bits/cest/plugin.yaml
+bits/cest/cest/cest.h
+```
+
+The source code for the installed project bits is kept in the `bits` directory. This directory should be treated as read-only and modifying it is not recommended.
 
 ### Testing
 
