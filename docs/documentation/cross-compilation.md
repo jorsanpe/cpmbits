@@ -9,9 +9,7 @@ One of cpm's main goals is to simplify cross-compilation. cpm provides flexibili
 
 ## Targets
 
-Each time you build a cpm project, it is built for a specific **target**. A target contains instructions for building the project beyond the [compilation plan](http://127.0.0.1:4000/documentation/project-descriptor.html#Compilation){:target="_blank"}. Targets are labeled with a **target name**. A target name is just an alias provided by the project developer and can be any string.
-
-Targets must not be confused with platforms (see next section). A target is something that is *specific to the project*, and its name can be anything that the developer deems meaningful. This is important when dealing with dependencies, as the `targets` section of the bits are ignored.
+Each time you build a cpm project, it is built for a specific **target**. Targets are labeled with a **target name**. A target name is just an alias provided by the project developer and can be any string. Targets must not be confused with platforms (see next section). A target is something that is *specific to the project*, and its name can be anything that the developer deems meaningful. This is important when dealing with dependencies, as the `targets` section of the bits are ignored.
 
 cpm always has a target named *default*. When no target is specified in the command line, cpm will follow the build instructions configured under `default` in the `targets` section of the project descriptor.
 
@@ -56,8 +54,8 @@ version: 0.0.1
 ...
 targets:
   default:
-    image: 'cpmbits/raspberrypi4:64'  # Add the option here
     main: 'main.cpp'
+    image: 'cpmbits/raspberrypi4:64'  # Configured here
 ```
 
 That's it. Now, when you build your project, it'll generate a Raspberry Pi 4 64-bit compatible binary (this particular Docker image is a bit heavy, around 2GB, so the first time you compile using this image will take some time):
@@ -84,8 +82,8 @@ version: 0.0.1
 ...
 targets:
   default:
-    Dockerfile: 'Dockerfile'
     main: 'main.cpp'
+    dockerfile: 'Dockerfile'  # Configured here
 ```
 
 Dockerfiles cannot be combined with Docker images in the project descriptor as they are mutually exclusive (either you use a Dockerfile or a pre-built Docker image). When both are specified, `image` will be used.
@@ -99,3 +97,13 @@ A second consideration is that the Docker containers created during the compilat
 ## Cross-compiling configuring the compiler prefix
 
 You can also specify the toolchain prefix in the project descriptor. This alternative can be used in combination with a Docker image. In this case, cpm will prepend the toolchain prefix configuration to the toolchain tools by defining the `CMAKE_C_COMPILER` and `CMAKE_CXX_COMPILER` settings in the `CMakeLists.txt` file.
+
+```yaml
+name: 'project'
+version: 0.0.1
+...
+targets:
+  default:
+    main: 'main.cpp'
+    toolchain_prefix: 'arm-linux-gnueabihf-'  # Configured here
+```
