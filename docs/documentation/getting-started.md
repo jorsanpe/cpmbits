@@ -46,5 +46,4 @@ cpm install
 cpm test
 ```
 
-Test sources reside in the `tests` directory. They are found recursively from the root directory
- using the expression `test_*.cpp`.
+Test sources reside in the `tests` directory. They are found recursively from the root directory using the expression `test_*.cpp`. More information about testing can be found in the [testing section](/documentation/testing.html).
