@@ -4,9 +4,18 @@ title: "cpm: A Modern Tool for C/C++"
 author: Jordi Sánchez
 ---
 
-Unlike other more modern languages, C/C++ does not have a unified centralized tool for package and project management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development, as dependencies are just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only one to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
+Unlike other more modern languages, C/C++ does not have a unified centralized tool for project and dependency management. Take for example `pip`; this tool offers an ecosystem from which developers can greatly benefit. It speeds up development with dependencies just one command away, without the need for complex installation recipes or hunting for repositories. Python is not the only language to offer a "dependency hub"; others like Java, Ruby or JavaScript also have their own ecosystems.
 
-The main goal of cpm is to offer an ecosystem for C/C++ developers. It is composed of two main ingredients: the command line tool and the bits repository. Following, we present a step by step tutorial, after which you should end up with a running application. We try to maintain this tutorial to be valid for the latest version of cpm which, by the time of this writing, is version 1.6. You might find more information in your `project.yaml` file than what is presented here but you can safely ignore the extra parts in your project descriptor for this tutorial.
+cpm appears to fill that gap, offering two main ingredientes. First, a simple yet powerful command line tool for managing C/C++ projects, with unit testing and cross-compilation at its core. Second, a central hub where the developers can share code in the form of `bits`. 
+
+The core features of cpm are:
+
+* *Simplified project management*.
+* *Test Driven Development ready*.
+* *Simpler cross-compilation*.
+* *Dependency management through `bits`*.
+
+Following, we present a step by step tutorial, after which you should end up with a running application. We try to maintain this tutorial to be valid for the latest version of cpm which, by the time of this writing, is version 1.6. You might find more information in your `project.yaml` file than what is presented here but you can safely ignore the extra parts in your project descriptor for this tutorial.
 
 ## Tutorial
 
@@ -61,15 +70,15 @@ Beware that the project descriptor is considered to be owned by the developer so
 
 ### Packages
 
-Projects in cpm are structured around <strong>packages</strong>. A package is a collection of (hopefully) related code that can be addressed from the package root. They try to be analogous to Python or Java packages. Let's see how they work with an example of a package named `multiplication`.
+Source code in cpm is structured around <strong>packages</strong>. A package is a collection of (hopefully) related source code files that can be addressed from the package root. A package is the minimum compilation unit in cpm, that is, compilation options can be defined, at a minimum, per package.
 
-First, we have to create the package root directory:
+Let's see how they work with an example of a package named `multiplication`. In order First, we create the package root directory:
 
 ```bash
 $ mkdir multiplication
 ```
 
-Second, edit the `project.yaml` file and declare the package:
+Second, we edit the `project.yaml` file and declare the package:
 
 ```yaml
 name: awesome-project
@@ -112,7 +121,7 @@ int Multiply::by(int other_number) {
 }
 ```
 
-By design, both source and header files are placed in the same directory. Now, let's make use of the `Multiply` class by modifying the `main.cpp` file:
+Notice how, in order to include the header file with the `Multiply` class interface, we address the header file including the package name. By design, both source and header files are placed in the same directory. Now, let's make use of the `Multiply` class by modifying the `main.cpp` file:
 
 ```cpp
 // Main.cpp
@@ -126,7 +135,7 @@ using namespace std;
 
 int main()
 {
-    cout << "multiply 6 x 8 = " << Multiply(6).by(8) << endl;
+    cout << "6 x 8 = " << Multiply(6).by(8) << endl;
     return 0;
 }
 ```
@@ -159,7 +168,7 @@ Nesting packages (packages inside other packages) is currently not supported.
 
 Bits are the way to share code with cpm. Bits are pieces of source code that can be downloaded and used in your project. Being in the form of source code, you can compile them for whatever target you require, as long as the bit is compatible for that target.
 
-Let's say we want to make use of the <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a> framework for our tests. We start by declaring the dependency in the project descriptor:
+Let's say we want to make use of the [Cest](https://cestframework.com/){:target="_blank"} framework for our tests. We start by declaring the dependency in the project descriptor:
 
 ```yaml
 name: awesome-project
@@ -184,13 +193,18 @@ main.cpp
 project.yaml
 multiplication/Multiply.cpp
 multiplication/Multiply.h
-bits/cest/plugin.yaml
+bits/cest/project.yaml
 bits/cest/cest/cest.h
 ```
 
 The source code for the installed project bits is kept in the `bits` directory. This directory should be treated as read-only and modifying it is not recommended.
 
-### Testing
+## Next steps
 
-cpm is Test Driven Development ready. Currently, the official unit testing framework is <a href="https://cestframework.com/" rel="noopener" target="_blank">Cest</a>. Testing will be explained in a future tutorial, as this one is already quite long.
+The tutorial presented here covers just the basics of what cpm can do. You can find more information in the following sections:
 
+* Information about testing can be found in the [testing section](/documentation/testing.html).
+* Take a look at the [cross-compilation section](/documentation/cross-compilation.html) in the documentation.
+* More on [bit development](/documentation/bit-development.html) in the documentation.
+
+Finally, any contribution in any form is very welcome. Go to the [cpm GitHub project](https://github.com/jorsanpe/cpm), where you can start a [discussion](https://github.com/jorsanpe/cpm/discussions) or [open an issue](https://github.com/jorsanpe/cpm/issues/new).
