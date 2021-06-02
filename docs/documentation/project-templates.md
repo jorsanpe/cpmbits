@@ -8,7 +8,7 @@ title: project-templates
 Starting from cpm version 1.7.0, project templates are supported. A cpm project can be created from a template. Such template will be downloaded from cpm-hub, provided it exists. A project can be created from a template as follows:
 
 ```bash
-cpm create -t arduino-uno:0.1.0 project-from-template
+cpm create -t arduino-uno:0.2.0 project-from-template
 ```
 
 The above command will download the `arduino-uno` template from cpm-hub and create a project based on it. When the project is created, the template `project.yaml` will be edited to set the project name and the project version. 
