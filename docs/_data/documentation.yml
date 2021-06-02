@@ -12,3 +12,5 @@
   link: /documentation/bit-development.html
 - name: Cross Compilation
   link: /documentation/cross-compilation.html
+- name: 'Project Compilation'
+  link: /documentation/project-compilation.html

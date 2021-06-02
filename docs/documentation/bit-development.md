@@ -26,7 +26,7 @@ cpm allows publishing versions that follow [SemVer](https://semver.org/){:target
 Use the following command of the cpm cli:
 
 ```bash
-cpm publish -s https://repo.cpmbits.com:8000/bits
+cpm publish -s https://repo.cpmbits.com:8000
 ```
 
 cpm will prompt for your user and password and then will proceed to package your project and publish it in the cpmbits repository. By providing the URL, we allow users to publish different bits in different repositories (therefore supporting custom cpm-hub installations).
