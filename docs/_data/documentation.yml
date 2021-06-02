@@ -14,3 +14,5 @@
   link: /documentation/cross-compilation.html
 - name: 'Project Compilation'
   link: /documentation/project-compilation.html
+- name: 'Project Templates'
+  link: /documentation/project-templates.html

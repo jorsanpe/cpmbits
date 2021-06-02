@@ -64,7 +64,7 @@ cpm test [files or dirs]
   
 **OPTIONS**
 
-  `<pattern>...` The pattern option allows you to run only the tests contained in the test files that match the pattern. Multiple patterns can be specified.
+  `[files or dirs]` An optional list of files and directories from where to look for tests. If not specified, cpm will default to the `tests` directory.
 
 <div class="divider" data-content=""></div>
 
@@ -83,8 +83,14 @@ Publish a cpm project as a bit in cpm-hub. The publish command packs the project
 
 **SYNOPSIS**
 ```bash
-cpm publish -s <repository-url>
+cpm publish [-t] -s <repository-url>
 ```
+
+**OPTIONS**
+
+  `-s <repository-url>` The cpm-hub repository url where the project will be published
+
+  `-t` Publish the project as a template
 
 <div class="divider" data-content=""></div>
 
