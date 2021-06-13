@@ -15,7 +15,7 @@ cpm always has a target named *default*. When no target is specified in the comm
 
 ```yaml
 name: 'project'
-version: 0.0.1
+version: '0.0.1'
 ...
 targets:
   default:
@@ -26,7 +26,7 @@ You can create more targets by adding more sections to the `targets`. For exampl
 
 ```yaml
 name: 'project'
-version: 0.0.1
+version: '0.0.1'
 ...
 targets:
   default:
@@ -50,7 +50,7 @@ Let's see with an example how to cross-compile your project for Raspberry Pi 4 6
 
 ```yaml
 name: 'project'
-version: 0.0.1
+version: '0.0.1'
 ...
 targets:
   default:
@@ -78,7 +78,7 @@ When building using a Dockerfile, the Docker build directory will be the same as
 
 ```yaml
 name: 'project'
-version: 0.0.1
+version: '0.0.1'
 ...
 targets:
   default:
@@ -100,7 +100,7 @@ You can also specify the toolchain prefix in the project descriptor. This altern
 
 ```yaml
 name: 'project'
-version: 0.0.1
+version: '0.0.1'
 ...
 targets:
   default:

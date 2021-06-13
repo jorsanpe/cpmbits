@@ -33,8 +33,8 @@ First, assuming that you already have created a cpm project, you need to declare
 ...
 test:
   bits:
-    cest: 1.0
-  cflags:
+    cest: '1.0'
+  cppflags:
     - -std=c++11
 ```
 

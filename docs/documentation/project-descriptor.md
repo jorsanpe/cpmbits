@@ -64,11 +64,15 @@ build:
 #include <sqlite3/...>
 ```
 
-Each package can have specific `cflags`.
+Each package can have specific `cflags` and `cppflags`.
 
 #### cflags
 
-The `cflags` element is used to define the compilation options used in a particular compilation unit. The `cflags` can be defined at different scopes, including generic build, generic test, package specific and target specific.
+The `cflags` element is used to define the compilation options for `C` files in a particular compilation unit. The `cflags` can be defined at different scopes, including generic build, generic test, package specific and target specific.
+
+#### cppflags
+
+The `cppflags` element is used to define the compilation options for `C++` files in a particular compilation unit. The `cppflags` can be defined at different scopes, including generic build, generic test, package specific and target specific.
 
 #### ldflags
 
@@ -86,7 +90,7 @@ The `includes` element allows the user to specify user-defined include directori
 
 The `bits` element is used to declare the dependencies for a particular compilation plan. Each `bit` entry contains a string declaring the bit version that the project depends on.
 
-#### Example
+#### Example of a Compilation Plan
 
 Here's a complete example of a compilation plan:
 
@@ -96,13 +100,17 @@ build:
     sqlite3:
       cflags: ['-DSQLITE_MUTEX_NOOP']   # These flags apply only for the sqlite3 package
   cflags: ['-g']                        # These flags apply globally
+  cppflags: ['-std=c++11']              # These flags apply globally
   ldflags: []
   libraries: ['pthread', 'ssl']
   bits:
     base64: '1.0'
+    spdlog: 
+      version: '1.6.1'
+      cppflags: ['-DSPDLOG_COMPILED_LIB']
 test:
   packages:
-    tests/mocks:
+    tests/helpers:
   cflags: ['-O0']
   ldflags: []
   libraries: ['CppUTest', 'CppUTestExt']
@@ -114,7 +122,8 @@ In this example:
 * The application contains one package named `sqlite3`. The directory `<project_root>/sqlite3` is expected to contain the sources of the package. 
 * When building the application, all source files in the `sqlite3` package will be compiled using the flags `-g -DSQLITE_MUTEX_NOOP`.
 * The application will be linked agains the libraries `libpthread libssl`.
-* When running the tests, an additional `tests/mocks` package will be included in the compilation of each test suite.
+* The `spdlog` bit packages will be compiled using the bit defined flags plus the defined `-DSPDLOG_COMPILED_LIB` flag.
+* When running the tests, an additional `tests/helpers` package will be included in the compilation of each test suite.
 * When running the tests, all source files in the `sqlite3` package will be compiled using the flags `-g -DSQLITE_MUTEX_NOOP -O0`.
 * When running the tests, each test suite will be linked against the libraries `libpthread libssl libCppUTest libCppUTestExt`.
 
@@ -136,13 +145,17 @@ Each target can extend the base compilation plan with some particular compilatio
 
 Use this to indicate the name of a Docker image where the project will be built. This allows developers to share docker images where the toolchains and all the compilation dependencies are already installed, so complex toolchain and library setups can be avoided.
 
+#### targets.&lt;target_name&gt;.dockerfile
+
+Use this to indicate the path to a Dockerfile. The purpose is the same as with `targets.<target_name>.image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile inside it. The `image` and `dockerfile` sections are mutually exclusive so if both are specified, `image` will be used.
+
 #### targets.&lt;target_name&gt;.test_image
 
 Use this to indicate the name of a Docker image where the project tests will be built and run. Similarly to the `image` configuration parameter, this allows developers to share docker images where the toolchains and all the testing dependencies are already installed.
 
-#### targets.&lt;target_name&gt;.dockerfile
+#### targets.&lt;target_name&gt;.test_dockerfile
 
-The purpose is the same as with `targets.<target_name>.image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile inside it. The `image` and `dockerfile` sections are mutually exclusive so if both are specified, `image` will be used.
+Use this to indicate the path to a Dockerfile. The purpose is the same as with `targets.<target_name>.test_image`, but instead of downloading a pre-built docker image, cpm uses this Dockerfile to build an image on the fly and compile and run the tests inside of it. The `test_image` and `test_dockerfile` sections are mutually exclusive so if both are specified, `test_image` will be used.
 
 #### targets.&lt;target_name&gt;.post_build
 
@@ -159,7 +172,7 @@ targets:
   default:
     main: 'main.cpp'
     image: 'cpmbits/raspberrypi4:64'
-    test_image: 'cpmbits/ubuntu:20.04'
+    test_dockerfile: 'ubuntu.20.04.Dockerfile'
     post_build: 'objcopy -S build/binary'
     toolchain_prefix: 'arm-linux-gnueabihf-'
 ```
@@ -170,6 +183,7 @@ The following corresponds to the project descriptor used in [cpm-hub](https://gi
 
 ```yaml
 name: 'cpm-hub'
+version: '1.0.0'
 description: 'cpm-hub open source server for hosting cpm bits'
 build:
   packages:
@@ -182,14 +196,16 @@ build:
     cpm-hub/logging:
     cpm-hub/kpi:
     cpm-hub/database:
-  cflags: [ '-std=c++11', '-g' ]
+  cppflags: [ '-std=c++11', '-g' ]
   bits:
     mongoose: '6.16'
     json: '3.7.3'
     base64: '1.0'
     blake3: '1.0'
     inih: '1.0'
-    spdlog: '1.6.1'
+    spdlog: 
+      version: '1.6.1'
+      cppflags: ['-DSPDLOG_COMPILED_LIB']
     sqlite3: '3.32.3'
   libraries: [ 'boost_filesystem', 'boost_system', 'boost_program_options', 'pthread', 'ssl', 'crypto' ]
 test:

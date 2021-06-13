@@ -59,12 +59,13 @@ Compile and run project tests. If no files or dirs are specified, tests will be 
 
 **SYNOPSIS**
 ```bash
-cpm test [files or dirs]
+cpm test [files or dirs] [-- <test command line args>]
 ```
   
 **OPTIONS**
 
   `[files or dirs]` An optional list of files and directories from where to look for tests. If not specified, cpm will default to the `tests` directory.
+  `[-- <test command line args>]` Command line arguments to forward to each test suite execution.
 
 <div class="divider" data-content=""></div>
 
