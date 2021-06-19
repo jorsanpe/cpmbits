@@ -1,11 +1,11 @@
 ---
 layout: documentation
-title: cpm-internals-compilation
+title: internals-compilation
 ---
 
-# cpm Internals: Compilation
+# Internals: Compilation
 
-cpm orquestrates the compilation using cmake. When building or testing a project, cpm automatically generates a `CMakeLists.txt` tailored for the build target.
+cpm orquestrates the compilation using cmake. Each time the project is built or tested, cpm generates a new `CMakeLists.txt` custom tailored for the build target.
 
 ## Compilation Plans
 
@@ -49,6 +49,22 @@ Then, the following set of compilation options apply:
 | `cpm build ubuntu` | `package1` | `-DPACKAGE2_DEFINE -DBUILD_DEFINE -DUBUNTU_TARGET_DEFINE` |
 
 Packages are the most basic compilation unit. This is required as different packages can have different cflags. When generating the `CMakeLists.txt` file, cpm creates an object library for each package. Then, the final compilation step consists in combining the different object libraries, each one corresponding to a package, to form the final target binaries.
+
+## Mixing C and C++ Files
+
+While C and C++ source code can be mixed, some of the compilation flags used in the command line are incompatible. In order to solve this problem, cpm will create a different object library for C and C++ files inside the same package. `cflags` and `cppflags` are mutually exclusive, so that the C files will be compiled using `cflags` and the C++ using `cppflags`.
+
+```yaml
+build:
+  packages:
+    package1:
+      cflags: ['-DC_DEFINE']
+      cppflags: ['-DCPP_DEFINE']
+```
+
+| package | language | compilation flags used |
+| `package1` | `C` | `-DC_DEFINE` |
+| `package1` | `C++` | `-DCPP_DEFINE` |
 
 ## Bit Compilation
 

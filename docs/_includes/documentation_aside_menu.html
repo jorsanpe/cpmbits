@@ -9,4 +9,14 @@
         </a></li>
         {% endfor %}
     </ul>
+    <p class="menu-label">
+        Internals
+    </p>
+    <ul class="menu-list">
+        {% for item in site.data.internals %}
+        <li><a href="{{ item.link }}" class="{% if page.url == item.link %}is-active{% endif %}">
+            {{ item.name }}
+        </a></li>
+        {% endfor %}
+    </ul>
 </aside>
