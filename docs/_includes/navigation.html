@@ -13,11 +13,12 @@
     
     <div id="navbarLinks" class="navbar-menu">
       <div class="navbar-start">
-        {% for item in site.data.navigation %}
-        <a href="{{ item.link }}" class="navbar-item {% if page.url == item.link %}navbar-item-active{% endif %}">
-          {{ item.name }}
+        <a href="/documentation/getting-started.html" class="navbar-item {% if page.url contains '/documentation/' %}navbar-item-active{% endif %}">
+          Documentation
         </a>
-        {% endfor %}
+        <a href="/blog_cover.html" class="navbar-item {% if page.url == '/blog_cover.html' or page.id %}navbar-item-active{% endif %}">
+          Blog
+        </a>
         <div class="navbar-item">
           <a class="button" href="https://github.com/jorsanpe/cpm" target="_blank">
             <img src="/assets/images/GitHub-Mark-64px.png" height="28">
