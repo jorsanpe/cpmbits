@@ -5,9 +5,16 @@ title: project-structure
 
 # Project Structure
 
-This section describes how cpm projects are managed. When in doubt, please refer to [cpm-hub](https://github.com/jorsanpe/cpm-hub){:target="_blank"} for reference, as cpm-hub is based on cpm.
+cpm offers a lot of flexibility for organizing the project sources. You can take [cpm-hub](https://github.com/jorsanpe/cpm-hub){:target="_blank"} for a reference project based on cpm.
 
-cpm projects are structured as follows:
+A cpm project has:
+ - The project descriptor file `project.yaml`.
+ - One or more `main.cpp` files (depending on the project targets).
+ - The `bits` directory, where the project dependencies are installed for the time being.
+ - The project tests. By default, they are expected to be located in the directory of the same name.
+ - The project packages. Nested packages are not supported for the time being.
+
+For reference, this is how a cpm project could be structured:
 
 ```
 Project/
@@ -31,11 +38,11 @@ The project description is stored in this file following the [cpm project descri
 
 ### `main.cpp`
 
-The `main.cpp` file contains the `main` function of the application. This file is required to exist in the project root directory and contain the implementation of the `main` function.
+The `main.cpp` files contains the `main` function of the application. They are kept separate from the project packages in order to enable testing, as testing frameworks will normally implement their own `main` functions. The file containing the `main` function is configured per project.
 
 ## Packages
 
-Packages allow the user to structure the code however needed. By design, we're removing the `src <-> include` separation. Instead, source code and header files are stored next to each other, creating a proper structure for packages. A _package_ in cpm is the root of a set of source files with no particular structure. The package sources are found recursively from the package root.
+Packages allow the user to structure the code however needed. By design, we're removing the `src <-> include` separation. Instead, source code and header files are stored next to each other, creating a proper structure for packages. A _package_ in cpm is the root of a set of source files with no particular structure. The package sources are found recursively from the package root. Nested packages are not supported.
 
 Using packages is pretty straightforward. First, package your code however you require:
 
