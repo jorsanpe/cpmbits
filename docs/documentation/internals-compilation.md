@@ -15,7 +15,7 @@ At the broadest level, cpm uses a concept call a [compilation plan](/documentati
   - *Target specific build compilation plan*, defined in the `target.<target_name>.build` element of the project descriptor.
   - *Target specific test compilation plan*, defined in the `target.<target_name>.test` element of the project descriptor.
 
-As you can see, each target has its own compilation plan. **For the time being, the only target specific test compilation plan that will be used is for the `default` target.**
+As you can see, each target has its own compilation plan. **For the time being, the only target specific test compilation plan supported is the `default` one.**
 
 The different compilation plans are combined to generate the final set of compilation options for all the files of that target. Let's say you build the project for the `default` target using `cpm build`, then the cflags that will be used to compiled all files will be the cflags defined in the common build compilation plan plus the cflags defined in the `default` target build compilation plan. Additionally, the packages of each project can have additional compilation options that will apply only to the compilation of that package. 
 

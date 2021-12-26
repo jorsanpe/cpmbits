@@ -88,7 +88,48 @@ The `includes` element allows the user to specify user-defined include directori
 
 #### bits
 
-The `bits` element is used to declare the dependencies for a particular compilation plan. Each `bit` entry contains a string declaring the bit version that the project depends on.
+The `bits` element is used to declare the dependencies for a particular compilation plan. The `bits` element can be used in two different ways:
+
+##### bits: string
+
+When the `bits` section is configured as a string, the string indicates the version of the bit that our project depends on. Here's how it works:
+
+```yaml
+build:
+  bits:
+    base64: '1.0'
+```
+
+##### bits: dictionary
+
+When the `bits` section is configured as a dictionary, additional options are available that allow finer grained configuration of the bit. 
+
+###### bits.&lt;name&gt;.version
+
+This field allows specifying the bit version to be used.
+
+###### bits.&lt;name&gt;.target
+
+A bit can have configuration defined for multiple targets. This field allows choosing the specific bit target to use. This is useful for certain embedded systems, like arduino, which have libraries that give support for many different platforms.
+
+###### bits.&lt;name&gt;.cflags
+
+When specified, all bit `C` files will be compiled using this compilation flag. This is useful for certain bits that require configuring the compilation via compilation flags.
+
+###### bits.&lt;name&gt;.cppflags
+
+When specified, all bit `C++` files will be compiled using this compilation flag.
+
+Here's in summary how the bit compilation can be customized from the project descriptor:
+
+```yaml
+build:
+  bits:
+    ArduinoCode-mbed:
+      version: '1.0'
+      target: 'ArduinoNano33BLE'
+      cflags: ['-O2']
+```
 
 #### Example of a Compilation Plan
 
