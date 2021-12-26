@@ -2390,7 +2390,7 @@ a.box:active {
   color: #fff;
 }
 .tag:not(body).is-primary {
-  background-color: #00d1b2;
+  background-color: #2e8b57;
   color: #fff;
 }
 .tag:not(body).is-primary.is-light {
@@ -8766,6 +8766,11 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-family: monospace !important;
 }
 
+.is-family-logo {
+  font-family: 'Fira Code', monospace;
+  font-weight: 500;
+}
+
 .is-block {
   display: block !important;
 }
@@ -9382,7 +9387,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 .hero.is-primary {
   /* background-color: #8DA300; */
-  background-color: #2E8B57;
+  background-color: #20613d;
   color: #fff;
 }
 .hero.is-primary a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
